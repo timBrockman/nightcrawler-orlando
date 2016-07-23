@@ -21,14 +21,14 @@
   - active dispatch calls (xml)
 
 ###vm
-hauntsVM
-callsVM
+  - spotsVM
+  - callsVM
 
 ###v
-wrapper
-starting location list
-map
-active calls list
+  - wrapper
+  - starting location list (ko)
+  - map
+  - active calls list (ko)
 
 ###map
 separate map related calls (like geocoding)
