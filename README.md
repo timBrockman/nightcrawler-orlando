@@ -8,23 +8,27 @@
   - Be the first reporter on the scene to get the 'money shot'.
 
 ##Running the project
-  Simply visit the demo page at [https://timBrockman.github.io/nightcrawler-orlando](https://timBrockman.github.io/nightcrawler-orlando)
+  Simply visit the demo page at [https://timBrockman.github.io/nightcrawler-orlando](https://timBrockman.github.io/nightcrawler-orlando).
+  Optionally, you could clone the repo and open the index.html file in a browser (with your own Google Maps api key).
 
 ##features
-  - uses google maps api (maps, styling, custom markers, geocoding)
+  - uses Google Maps api (maps, styling, custom markers, geocoding)
   - uses Orlando's active dispatch live feed
   - uses Knockout.js to connect data to DOM
 
-m
-haunts locations (starter-data.json)
-active dispatch calls
-map api info
+###m
+  - starting locations in spots array (247.js)
+  - active dispatch calls (xml)
 
-vm
-haunts call yelp api for current whatever
+###vm
+hauntsVM
+callsVM
 
-v
+###v
 wrapper
 starting location list
 map
 active calls list
+
+###map
+separate map related calls (like geocoding)
