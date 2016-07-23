@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NightCrawler: Orlando&nbsp;Edition</title>
+    <link rel="stylesheet" href="css/style.css" media="screen">
+</head>
+<body>
+	<header>
+	  <h1>NightCrawler: Orlando Edition</h1>
+    <hr />
+    <nav data-bind="foreach:spots">
+      <a class="navItem" data-bind="text:name"></a>
+    </nav>
+	</header>
+  <main>
+    <div id="callBox">
+      <ul>
+        <li>call</li>
+      </ul>
+    </div>
+    <div id="map"></div>
+  </main>
+  <footer>
+    test
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+  <script src="js/247.js"></script>
+  <script>
+    console.log(spots[0].name);  
+  </script>
+  <!--script src="js/247.js"></script>
+  <script src="js/vm.js"></script>
+  <script src="js/view.js"></script-->
+</body>

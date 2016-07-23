@@ -1,0 +1,67 @@
+/*
+resets and whatnot slapped in to main styles
+*/
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  font-size: 62.5%;/* 1rem = 10px ala skeleton*/
+}
+body{
+  margin: 0;
+  color: #ccc;
+  font-size: 2rem;/*20px*/
+}
+h1, h2, ul, li{margin: 0;}
+nav{
+  width: 100vw;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+.navItem{
+  min-width: 100px;
+  background-color: #000;
+  color:red;
+  text-align: center;
+  box-sizing: border-box;
+  border:solid 2px transparent;
+}
+.navItem:hover{
+  border: solid 2px red;
+}
+.navItem:active{
+  border: solid 0 0 2px 0 red;
+}
+header {
+  min-height: 100px;
+  width: 100vw;
+  background-color: #000;
+  color: red;
+}
+main {
+  min-height:calc(100vh - 150px);
+  display: flex;
+  flex-flow: row wrap;
+}
+footer {
+  width: 100vw;
+  height: 50px;
+  background-color: #000;
+}
+#map {
+  flex-grow: 5;
+  order: 1;
+  min-width: 320px;
+  background-color: #ccc;
+}
+#callBox {
+  flex-grow: 2;
+  order:2;
+  min-width: 100px;
+  background-color: #000;
+}
+@media screen and (min-width:420px) {
+  #callBox{order:1;}
+}
