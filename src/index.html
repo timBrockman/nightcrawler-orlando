@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>NightCrawler: Orlando&nbsp;Edition</title>
     <link rel="stylesheet" href="css/style.css" media="screen">
+
 </head>
 <body>
 	<header>
@@ -25,11 +26,18 @@
     test
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <!--script src="js/fetch.js"></script-->
   <script src="js/247.js"></script>
+  <script src="js/calls.js"></script>
   <script>
-    console.log(spots[0].name);  
+//this will be part of calls.js in the future
+    var calls = [];
+//callback pushes new Dispatch call objects into calls array
+    function cb(data){
+      console.log(data);
+    };
+    makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cb);
+    //console.log(spots[0].name);//check
   </script>
-  <!--script src="js/247.js"></script>
-  <script src="js/vm.js"></script>
-  <script src="js/view.js"></script-->
 </body>
