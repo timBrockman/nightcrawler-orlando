@@ -15,13 +15,13 @@
         text:title,
         attr:{},
         style:{},
-        click:function(data){console.log(data.mid());}"></a>
+        click:function(data){console.log(data.mid());}">loading 24 hour spots...</a>
     </nav>
 	</header>
   <main>
     <div id="callBox">
-      <ul>
-        <li>call</li>
+      <ul data-bind="foreach:vmCalls">
+        <li class="callItem" data-bind="">loading calls...</li>
       </ul>
     </div>
     <div id="map"></div>
@@ -62,18 +62,29 @@ ko.applyBindings(SpotsVM);
 
   <script src="js/calls.js"></script>
   <script>
-//this will be part of calls.js in the future
-    var calls = [];
+var mCalls = [];
+//todo: elaborate
+function Call(data){
+  this.data = data;
+}
+function CallsVM(){
+  var self = this;
+  var itemCount = 0;
+  self.vmCalls =
+    ko.observableArray($.map(
+      mCalls, function(item){
+        item.markerId = 'call'+ itemCount++;
+        return new Call(item);
+      }
+    )
+  );
+}
 //callback pushes new Dispatch call objects into calls array
-    function cb(data){
-      console.log(data);
-
-      // applyBindings
-    };
-    makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cb);
-    //console.log(spots[0].name);//check
-
-//ko spots vm
-
+function cb(data){
+  console.log(data);
+  mCalls = data;
+  ko.applyBindings(CallsVM);
+};
+makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cb);
   </script>
 </body>
