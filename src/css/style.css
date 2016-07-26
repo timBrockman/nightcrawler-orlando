@@ -21,7 +21,7 @@ nav{
   align-content: space-around;
 }
 .navItem{
-  min-width: 100px;
+  min-width: 200px;
   background-color: #000;
   color:red;
   text-align: center;

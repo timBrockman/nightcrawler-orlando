@@ -3,7 +3,8 @@
 //would like to use promises but, probably stick to callback hell and banana code
 //want to use fetch but failed
 // jquery still doesn't dataType:'jsonp xml' as advertised
-// Fuuuuuuug finaly good ole yql sabes the day
+// Fuuuuuuug, finaly, good ole yql sabes the day
+// I hope verison doesn't wreck yql
 /*
 function makeRequest(url){
   var options = {

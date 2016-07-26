@@ -14,6 +14,7 @@
 ##features
   - uses Google Maps api (maps, styling, custom markers, geocoding)
   - uses Orlando's active dispatch live feed
+  - uses Yahoo Developer Network's YML to turn the archaic city gubmen xml feed to something consumable by today's browsers
   - uses Knockout.js to connect data to DOM
 
 ###m
