@@ -10,7 +10,7 @@ html {
 body{
   margin: 0;
   color: #ccc;
-  font-size: 2rem;/*20px*/
+  font-size: 1.2rem;/*12px*/
 }
 h1, h2, ul, li{margin: 0;}
 nav{
@@ -28,17 +28,15 @@ nav{
   box-sizing: border-box;
   border:solid 2px transparent;
 }
-.navItem:hover{
+.navItem:hover,.navItem:active{
   border: solid 2px red;
-}
-.navItem:active{
-  border: solid 0 0 2px 0 red;
 }
 header {
   min-height: 100px;
   width: 100vw;
   background-color: #000;
   color: red;
+  text-align: center;
 }
 main {
   min-height:calc(100vh - 150px);
@@ -51,17 +49,38 @@ footer {
   background-color: #000;
 }
 #map {
-  flex-grow: 5;
+  flex-grow: 4;
+  flex-basis: 160px;
   order: 1;
   min-width: 320px;
+  min-height: calc(100vh - 150px);
   background-color: #ccc;
 }
 #callBox {
-  flex-grow: 2;
+  flex-grow: 1;
+  flex-basis: 160px;
   order:2;
-  min-width: 100px;
+  min-width: 160px;
+  min-height: calc(100vh - 150px);
   background-color: #000;
 }
-@media screen and (min-width:420px) {
+ul{
+  list-style: none;
+  -webkit-margin-before:0px;
+  -webkit-padding-start: 0px;
+  padding:0;
+  margin:0;
+  border:solid 1px red;
+}
+li{
+  border-bottom: solid 1px red;
+  padding: .5em;
+  font-size: 1em;
+  line-height: 1em;
+}
+li:last-of-type{border-bottom: 0px;}
+@media screen and (min-width:641px) {
+  body{font-size: 2rem;}
   #callBox{order:1;}
+  #map{order:2;}
 }
