@@ -7,7 +7,7 @@
 
 </head>
 <body>
-	<header>
+	<header id="header">
 	  <h1>NightCrawler: Orlando Edition</h1>
     <hr />
     <nav data-bind="foreach:vmSpots">
@@ -57,7 +57,7 @@ function SpotsVM(){
     )
   );
 }
-ko.applyBindings(SpotsVM);
+ko.applyBindings(SpotsVM, document.getElementById('header'));
   </script>
 
   <script src="js/calls.js"></script>
@@ -80,10 +80,14 @@ function CallsVM(){
   );
 }
 //callback pushes new Dispatch call objects into calls array
+var applied = false;
 function cb(data){
   console.log(data);
   mCalls = data;
-  ko.applyBindings(CallsVM);
+  if(!applied){
+    ko.applyBindings(CallsVM, document.getElementById('callBox'));
+    applied = true;
+  }
 };
 makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cb);
   </script>
