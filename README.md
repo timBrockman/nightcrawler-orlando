@@ -19,7 +19,7 @@
 
 ###m
   - starting locations in spots array (247.js)
-  - active dispatch calls (xml)
+  - active dispatch calls (xml -> yml:json)
 
 ###vm
   - spotsVM

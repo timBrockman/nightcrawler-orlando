@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>NightCrawler: Orlando&nbsp;Edition</title>
+    <title>&#128249; NightCrawler: Orlando Edition &#128249;</title>
     <link rel="stylesheet" href="css/style.css" media="screen">
 
 </head>
 <body>
 	<header id="header">
-	  <h1>NightCrawler: Orlando&nbsp;Edition</h1>
+	  <h1>&#128249; NightCrawler: Orlando&nbsp;Edition &#128249;</h1>
     <hr />
     <nav data-bind="foreach:vmSpots">
       <a class="navItem" data-bind="
@@ -24,7 +24,8 @@
       <div >opt accidents</div>
       <ul data-bind="foreach:vmCalls">
         <li class="callItem" data-bind="
-          text:description">loading calls...</li>
+          text:description,
+          click:function(data){console.log(data.isAccident());}">loading calls...</li>
       </ul>
     </div>
     <div id="map"></div>
@@ -66,7 +67,10 @@ ko.applyBindings(SpotsVM, document.getElementById('header'));
   <script src="js/calls.js"></script>
   <script>
 var mCalls = [];
+
 function Call(data){
+  var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC:'');
+  this.isAccident = ko.observable(/Accident/i.test(accidentTemp));
   this.description = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'unknown');
   this.dateTime = ko.observable(data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00');
   this.location = ko.observable(data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location');
