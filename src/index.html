@@ -21,7 +21,8 @@
   <main>
     <div id="callBox">
       <ul data-bind="foreach:vmCalls">
-        <li class="callItem" data-bind="">loading calls...</li>
+        <li class="callItem" data-bind="
+          text: description">loading calls...</li>
       </ul>
     </div>
     <div id="map"></div>
@@ -65,7 +66,13 @@ ko.applyBindings(SpotsVM, document.getElementById('header'));
 var mCalls = [];
 //todo: elaborate
 function Call(data){
-  this.data = data;
+  this.description = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'unknown');
+  this.dateTime = ko.observable(data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00');
+  this.location = ko.observable(data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location');
+  this.incidentId = ko.observable(data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id');
+  this.lat = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'0');
+  this.lng = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'0');
+  this.mid   = ko.observable(data.hasOwnProperty('markerId')?data.markerId:0); // corresponds to marker id
 }
 function CallsVM(){
   var self = this;
