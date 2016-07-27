@@ -21,7 +21,7 @@ nav{
   align-content: space-around;
 }
 .navItem{
-  min-width: 200px;
+  min-width: 160px;
   background-color: #000;
   color:red;
   text-align: center;
@@ -31,22 +31,24 @@ nav{
 .navItem:hover,.navItem:active{
   border: solid 2px red;
 }
+.center{text-align: center;}
 header {
-  min-height: 100px;
+  min-height: 120px;
   width: 100vw;
   background-color: #000;
   color: red;
-  text-align: center;
 }
 main {
-  min-height:calc(100vh - 150px);
+  min-height:calc(100vh - 120px);
   display: flex;
   flex-flow: row wrap;
 }
 footer {
   width: 100vw;
-  height: 50px;
+  min-height: 100px;
   background-color: #000;
+  color:red;
+  padding: .3em 0 0 0;
 }
 #map {
   flex-grow: 4;

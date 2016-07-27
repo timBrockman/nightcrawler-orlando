@@ -9,7 +9,7 @@
 </head>
 <body>
 	<header id="header">
-	  <h1>&#128249; NightCrawler: Orlando&nbsp;Edition &#128249;</h1>
+	  <h1 class="center">&#128249; NightCrawler: Orlando&nbsp;Edition &#128249;</h1>
     <hr />
     <nav data-bind="foreach:vmSpots">
       <a class="navItem" data-bind="
@@ -21,8 +21,8 @@
 	</header>
   <main>
     <div id="callBox">
-      Filter: <input id="accidentFilter" type="checkbox" data-bind="checked:onlyAccidents" />
-      <label for="accidentFilter"> Calls</label>
+      <div class="center">Filter: <input id="accidentFilter" type="checkbox" data-bind="checked:onlyAccidents" />
+      <label for="accidentFilter"> Calls</label></div>
       <ul data-bind="foreach:vmCalls">
         <li class="callItem" data-bind="
           text:description,
@@ -34,7 +34,15 @@
     <div id="map"></div>
   </main>
   <footer>
-    test
+    <nav>
+      <a class="navItem" target="_blank" href="https://github.com/timBrockman/nightcrawler-orlando">Github repo</a>
+      <a class="navItem" target="_blank" href="https://developer.yahoo.com/yql/">Yahoo's YQL</a>
+      <a class="navItem" target="_blank" href="http://knockoutjs.com/">Knockout.js</a>
+      <a class="navItem" target="_blank" href="https://jquery.com/">jQuery</a>
+      <a class="navItem" target="_blank" href="https://developers.google.com/maps/">Google Maps</a>
+      <a class="navItem" target="_blank" href="https://www.udacity.com/degrees/front-end-web-developer-nanodegree--nd001">Udacity FEND</a>
+    </nav>
+    <div class="center">This project works, thanks to the above resources. &copy;2016 Tim Brockman</div>
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
