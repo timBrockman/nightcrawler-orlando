@@ -78,6 +78,23 @@ li{
   font-size: 1em;
   line-height: 1em;
 }
+input[type="checkbox"]{
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  vertical-align: middle;
+  display: inline;
+}
+label
+  display:inline-block;
+  font-size: 1em;
+  line-height: 1em;
+  margin-left:.5em;
+  font-weight:normal;
+}
+
+li.accident::before{content: "\1F4A5\0020";}
 li:last-of-type{border-bottom: 0px;}
 @media screen and (min-width:641px) {
   body{font-size: 2rem;}

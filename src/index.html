@@ -21,10 +21,13 @@
 	</header>
   <main>
     <div id="callBox">
-      <div >opt accidents</div>
+      <input id="accidentFilter" type="checkbox" data-bind="checked:onlyAccidents" />
+      <label for="accidentFilter">Only Accidents</label>
       <ul data-bind="foreach:vmCalls">
         <li class="callItem" data-bind="
           text:description,
+          css:{accident: isAccident},
+          visible: filterAccident,
           click:function(data){console.log(data.isAccident());}">loading calls...</li>
       </ul>
     </div>
@@ -52,6 +55,7 @@ function Spot(data){
 function SpotsVM(){
   var self = this;
   var itemCount = 0; //derp
+
   self.vmSpots =
     ko.observableArray($.map(
       spots, function(item){
@@ -70,7 +74,12 @@ var mCalls = [];
 
 function Call(data){
   var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC:'');
-  this.isAccident = ko.observable(/Accident/i.test(accidentTemp));
+  this.isAccident = ko.observable(/Accident|Hit/i.test(accidentTemp));
+  this.filterAccident = ko.computed(function(){
+    //console.log(/Accident|Hit/i.test(accidentTemp));
+    //console.log(onlyAccidents());
+    return (/Accident|Hit/i.test(accidentTemp) || !onlyAccidents());
+  });
   this.description = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'unknown');
   this.dateTime = ko.observable(data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00');
   this.location = ko.observable(data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location');
@@ -82,6 +91,9 @@ function Call(data){
 function CallsVM(){
   var self = this;
   var itemCount = 0;
+
+  self.onlyAccidents = ko.observable(false);
+
   self.vmCalls =
     ko.observableArray($.map(
       mCalls, function(item){
