@@ -75,8 +75,8 @@ function Call(data){
   this.dateTime = ko.observable(data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00');
   this.location = ko.observable(data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location');
   this.incidentId = ko.observable(data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id');
-  this.lat = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'0');
-  this.lng = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'0');
+  this.lat = ko.observable(data.hasOwnProperty('lat')?data.lat:'0');
+  this.lng = ko.observable(data.hasOwnProperty('lng')?data.lng:'0');
   this.mid   = ko.observable(data.hasOwnProperty('markerId')?data.markerId:0); // corresponds to marker id
 }
 function CallsVM(){
