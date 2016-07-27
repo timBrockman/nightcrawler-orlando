@@ -21,12 +21,12 @@
 	</header>
   <main>
     <div id="callBox">
-      <input id="accidentFilter" type="checkbox" data-bind="checked:onlyAccidents" />
-      <label for="accidentFilter">Only Accidents</label>
+      Filter: <input id="accidentFilter" type="checkbox" data-bind="checked:onlyAccidents" />
+      <label for="accidentFilter"> Calls</label>
       <ul data-bind="foreach:vmCalls">
         <li class="callItem" data-bind="
           text:description,
-          css:{accident: isAccident},
+          css:{accident: isAccident()},
           visible: filterAccident,
           click:function(data){console.log(data.isAccident());}">loading calls...</li>
       </ul>

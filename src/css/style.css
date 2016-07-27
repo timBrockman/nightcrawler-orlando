@@ -80,18 +80,31 @@ li{
 }
 input[type="checkbox"]{
   color: inherit;
+  -webkit-appearance:inherit;
+  appearance:inherit;
+  content:'\128680';
+  font-size: 1em;
   margin: 0;
   padding: 0;
+  height: 1em;
+  width: 1em;
   box-sizing: border-box;
   vertical-align: middle;
   display: inline;
 }
-label
+label{
   display:inline-block;
   font-size: 1em;
   line-height: 1em;
   margin-left:.5em;
   font-weight:normal;
+}
+input[type="checkbox"] + label:before{
+  content:'\1F6A8 \0020 All ';
+
+}
+input[type="checkbox"]:checked + label:before{
+  content:'\1F4A5 \0020 Accident';
 }
 
 li.accident::before{content: "\1F4A5\0020";}
