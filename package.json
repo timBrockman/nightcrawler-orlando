@@ -4,7 +4,7 @@
   "description": "Maps crime in Orlando using Google Maps, YML and Knockout.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo -e '\xF0\x9F\x9A\xAC Everything passed. Hop in the barrel! Over the waterfall! GoGoGo!'",
+    "test": "echo -e 'Everything passed. Hop in the barrel! Over the waterfall! GoGoGo!'",
     "clean": "mkdir -p dist && touch dist/temp && rm -r dist/* && ls -a ./dist"
 
   },
