@@ -27,6 +27,7 @@ nav{
   text-align: center;
   box-sizing: border-box;
   border:solid 2px transparent;
+  text-decoration: none;
 }
 .navItem:hover,.navItem:active{
   border: solid 2px red;
@@ -116,3 +117,4 @@ li:last-of-type{border-bottom: 0px;}
   #callBox{order:1;}
   #map{order:2;}
 }
+.legal{font-size: smaller;margin-top: 1em;}

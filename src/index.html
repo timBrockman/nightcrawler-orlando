@@ -42,85 +42,153 @@
       <a class="navItem" target="_blank" href="https://developers.google.com/maps/">Google Maps</a>
       <a class="navItem" target="_blank" href="https://www.udacity.com/degrees/front-end-web-developer-nanodegree--nd001">Udacity FEND</a>
     </nav>
-    <div class="center">This project works, thanks to the above resources. &copy;2016 Tim Brockman</div>
+    <div class="center legal">This project works, thanks to the above resources. Copyright &copy;2016 Tim Brockman</div>
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <!--script src="js/fetch.js"></script-->
   <script src="js/247.js"></script>
-  <script>
-function Spot(data){
-  // not sure these need to be observable but, maybe want to add edit features some day
-  this.title = ko.observable(data.hasOwnProperty('name')?data.name:'unknown place');
-  this.phone = ko.observable(data.hasOwnProperty('phone')?data.phone:'no telephone number');
-  this.web   = ko.observable(data.hasOwnProperty('web')?data.web:'no website');
-  this.addy  = ko.observable(data.hasOwnProperty('addy')?data.addy:'no address');
-  this.lat   = ko.observable(data.hasOwnProperty('lat')?data.lat:0);
-  this.lng   = ko.observable(data.hasOwnProperty('lng')?data.lng:0);
-  this.mid   = ko.observable(data.hasOwnProperty('markerId')?data.markerId:0); // corresponds to marker id
-}
-
-function SpotsVM(){
-  var self = this;
-  var itemCount = 0; //derp
-
-  self.vmSpots =
-    ko.observableArray($.map(
-      spots, function(item){
-        item.markerId = 'spot'+ itemCount++;
-        return new Spot(item);//mmm banana
-      }
-    )
-  );
-}
-ko.applyBindings(SpotsVM, document.getElementById('header'));
-  </script>
-
   <script src="js/calls.js"></script>
+  <script src="js/models.js"></script>
+  <script src="js/vms.js"></script>
+  <script src="js/views.js"></script>
   <script>
-var mCalls = [];
+//map stuff
+// Create a map variable
+var map;
+var styles = [
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#444444"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#f2f2f2"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 45
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#666666"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#333333"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#000000"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "saturation": "-100"
+            },
+            {
+                "lightness": "0"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#dedede"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    }
+];
 
-function Call(data){
-  var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC:'');
-  this.isAccident = ko.observable(/Accident|Hit/i.test(accidentTemp));
-  this.filterAccident = ko.computed(function(){
-    //console.log(/Accident|Hit/i.test(accidentTemp));
-    //console.log(onlyAccidents());
-    return (/Accident|Hit/i.test(accidentTemp) || !onlyAccidents());
+// Function to initialize the map within the map div
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 28.537211, lng: -81.377001},
+    zoom: 11,
+    styles:styles
   });
-  this.description = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'unknown');
-  this.dateTime = ko.observable(data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00');
-  this.location = ko.observable(data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location');
-  this.incidentId = ko.observable(data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id');
-  this.lat = ko.observable(data.hasOwnProperty('lat')?data.lat:'0');
-  this.lng = ko.observable(data.hasOwnProperty('lng')?data.lng:'0');
-  this.mid   = ko.observable(data.hasOwnProperty('markerId')?data.markerId:0); // corresponds to marker id
 }
-function CallsVM(){
-  var self = this;
-  var itemCount = 0;
-
-  self.onlyAccidents = ko.observable(false);
-
-  self.vmCalls =
-    ko.observableArray($.map(
-      mCalls, function(item){
-        item.markerId = 'call'+ itemCount++;
-        return new Call(item);
-      }
-    )
-  );
-}
-//callback pushes new Dispatch call objects into calls array
-var applied = false;
-function cb(data){
-  console.log(data);
-  mCalls = data;
-  if(!applied){
-    ko.applyBindings(CallsVM, document.getElementById('callBox'));
-    applied = true;
-  }
-};
-makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cb);
+initMap();
   </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDEVVmIWFHRlfayjnj6zwWbs72eUBRu2cs&callback=initMap"></script>
+
 </body>
