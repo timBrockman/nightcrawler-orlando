@@ -1,0 +1,3 @@
+/*
+contains map functions including initMap
+*/

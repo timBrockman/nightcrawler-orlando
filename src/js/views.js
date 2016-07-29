@@ -1,7 +1,6 @@
 /*
 apply vms to views
 */
-ko.applyBindings(SpotsVM, document.getElementById('header'));
 
 //global for calls
 var mCalls = [];
@@ -15,4 +14,7 @@ function cb(data){
     applied = true;
   }
 };
-makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cb);
+
+
+  ko.applyBindings(SpotsVM, document.getElementById('header'));
+  makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cb);

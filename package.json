@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo -e 'Everything passed. Hop in the barrel! Over the waterfall! GoGoGo!'",
-    "clean": "mkdir -p dist && touch dist/temp && rm -r dist/* && ls -a ./dist"
+    "clean": "mkdir -p dist && touch dist/temp && rm -r dist/* && ls -a ./dist",
+    "concat": "cat ./src/*.js > ./dist/mostthethings.js",
+    "copy":"cp ./src/css/* ./dist/",
+    "iawk":"awk '/<!--jsstart/{p=1;print;print \"<script src=\"mostthethings.js\"></script>\"}/jssend-->/{p=0}!p' ./src/index.html > ./dist/index.html && "
 
   },
   "repository": {
@@ -14,7 +17,8 @@
   },
   "keywords": [
     "udacity",
-    "homework"
+    "homework",
+    "tacobellbuild"
   ],
   "author": "Tim Brockman",
   "license": "MIT",
