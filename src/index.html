@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>&#128249; NightCrawler: Orlando Edition &#128249;</title>
+    <title>&#128249; NightCrawler: Orlando Edition</title>
     <link rel="stylesheet" href="css/style.css" media="screen">
 
 </head>
 <body>
 	<header id="header">
-	  <h1 class="center">&#128249; NightCrawler: Orlando&nbsp;Edition &#128249;</h1>
+	  <h1 class="center">&#128249; NightCrawler: Orlando&nbsp;Edition</h1>
     <hr />
     <nav data-bind="foreach:vmSpots">
       <a class="navItem" data-bind="
@@ -52,6 +52,8 @@
   <script src="js/models.js"></script>
   <script src="js/vms.js"></script>
   <script src="js/views.js"></script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDEVVmIWFHRlfayjnj6zwWbs72eUBRu2cs&callback=initMap"></script>
   <script>
 //map stuff
 // Create a map variable
@@ -187,8 +189,6 @@ function initMap() {
     styles:styles
   });
 }
-initMap();
-  </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDEVVmIWFHRlfayjnj6zwWbs72eUBRu2cs&callback=initMap"></script>
+</script>
 
 </body>

@@ -1,18 +1,31 @@
 /*
 resets and whatnot slapped in to main styles
 */
+
 html {
   font-family: sans-serif; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
   font-size: 62.5%;/* 1rem = 10px ala skeleton*/
+  --bg-color:#dedede;
+  --color:#757575;
+  --hilight:#fff;
+  --fancy:"courier new", courier, monospace;
 }
 body{
   margin: 0;
+  background-color: #000;
+  background-color: var(--bg-color);
   color: #ccc;
+  color: var(--color);
   font-size: 1.2rem;/*12px*/
 }
-h1, h2, ul, li{margin: 0;}
+h1, ul, li{margin: 0;}
+h1{
+  color:var(--hilight);
+  font-family: var(--fancy);
+  font-weight:normal;
+}
 nav{
   width: 100vw;
   display: flex;
@@ -23,22 +36,24 @@ nav{
 }
 .navItem{
   min-width: 160px;
-  background-color: #000;
   color:red;
+  color:var(--color);
   text-align: center;
   box-sizing: border-box;
   border:solid 2px transparent;
   text-decoration: none;
+  cursor: pointer;
 }
-.navItem:hover,.navItem:active{
+.navItem:hover, .navItem:active{
   border: solid 2px red;
+  border: solid 2px var(--hilight);
 }
 .center{text-align: center;}
 header {
   min-height: 120px;
   width: 100vw;
-  background-color: #000;
   color: red;
+  color: var(--color);
 }
 main {
   min-height:calc(100vh - 120px);
@@ -50,8 +65,8 @@ main {
 footer {
   width: 100vw;
   min-height: 100px;
-  background-color: #000;
   color:red;
+  color: var(--color);
   padding: .3em 0 0 0;
 }
 #map {
@@ -63,6 +78,7 @@ footer {
   background-color: #ccc;
   box-sizing: border-box;
   border: solid 5px black;
+  border: solid 5px var(--bg-color);
 }
 #callBox {
   -webkit-flex: 1 1 auto;
@@ -70,7 +86,6 @@ footer {
   flex: 1 1 auto;
   min-width: 160px;
   min-height: calc(100vh - 150px);
-  background-color: #000;
 }
 ul{
   list-style: none;
@@ -79,12 +94,17 @@ ul{
   padding:0;
   margin:0;
   border:solid 1px red;
+  border:solid 1px var(--color);
 }
 li{
+  font-family: var(--fancy);
+  font-weight:normal;
   border-bottom: solid 1px red;
+  border-bottom:solid 1px var(--color);
   padding: .5em;
   font-size: 1em;
   line-height: 1em;
+  cursor:pointer;
 }
 input[type="checkbox"]{
   color: inherit;
