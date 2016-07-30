@@ -6,10 +6,9 @@
   "scripts": {
     "test": "echo -e 'Everything passed. Hop in the barrel! Over the waterfall! GoGoGo!'",
     "clean": "mkdir -p dist && touch dist/temp && rm -r dist/* && ls -a ./dist",
-    "concat": "cat ./src/*.js > ./dist/mostthethings.js",
-    "copy":"cp ./src/css/* ./dist/",
-    "iawk":"awk '/<!--jsstart/{p=1;print;print \"<script src=\"mostthethings.js\"></script>\"}/jssend-->/{p=0}!p' ./src/index.html > ./dist/index.html && "
-
+    "concat": "cat ./src/js/*.js > ./dist/mostthethings.js",
+    "cp":"mkdir -p ./dist/css && cp ./src/css/* ./dist/css/",
+    "ised":"sed '/<!--jsstart-->/,/<!--jsend-->/ s/^.*<script.*\\\/script>//g' < ./src/index.html > ./dist/index.html && sed -i 's/<!--jsstart-->/<script async defer src=\\\"mostthethings.js\\\"><\\\/script>/g' ./dist/index.html"
   },
   "repository": {
     "type": "git",
