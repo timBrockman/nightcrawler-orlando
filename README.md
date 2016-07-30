@@ -16,6 +16,15 @@
   - uses Orlando's active dispatch live feed
   - uses Yahoo Developer Network's YML to turn the archaic city gubmen xml feed to something consumable by today's browsers
   - uses Knockout.js to connect data to DOM
+  - my own AMD'ish callback implementation
+
+##Build
+  - use npm run build to run:
+    - clean: gives you a clean dist directory
+    - concat: cats most the js into one file
+    - cp: copies css files to the dist/css folder
+    - ised: replaces js file references
+  - use npm run deploy to deploy dist subrepo to gh-pages
 
 ###m
   - starting locations in spots array (247.js)
