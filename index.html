@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&#128249; NightCrawler: Orlando Edition</title>
+    <!--cssstart-->
+    <link rel="stylesheet" href="css/style.css" media="screen">
+    <!--cssend-->
+</head>
+<body>
+	<header id="header">
+	  <h1 class="center">&#128249; NightCrawler: Orlando&nbsp;Edition</h1>
+    <hr />
+    <nav data-bind="foreach:vmSpots">
+      <a class="navItem" data-bind="
+        text:title,
+        attr:{},
+        style:{},
+        click:function(data){console.log(data.mid());}">loading 24 hour spots...</a>
+    </nav>
+	</header>
+  <main>
+    <div id="callBox">
+      <div class="center">Filter: <input id="accidentFilter" type="checkbox" data-bind="checked:onlyAccidents" />
+      <label for="accidentFilter"> Calls</label></div>
+      <ul data-bind="foreach:vmCalls">
+        <li class="callItem" data-bind="
+          text:description,
+          css:{accident: isAccident()},
+          visible: filterAccident,
+          click:function(data){console.log(data.isAccident());}">loading calls...</li>
+      </ul>
+    </div>
+    <div id="map"></div>
+  </main>
+  <footer>
+    <nav>
+      <a class="navItem" target="_blank" href="https://github.com/timBrockman/nightcrawler-orlando">Github repo</a>
+      <a class="navItem" target="_blank" href="https://developer.yahoo.com/yql/">Yahoo's YQL</a>
+      <a class="navItem" target="_blank" href="http://knockoutjs.com/">Knockout.js</a>
+      <a class="navItem" target="_blank" href="https://jquery.com/">jQuery</a>
+      <a class="navItem" target="_blank" href="https://developers.google.com/maps/">Google Maps</a>
+      <a class="navItem" target="_blank" href="https://www.udacity.com/degrees/front-end-web-developer-nanodegree--nd001">Udacity FEND</a>
+    </nav>
+    <div class="center legal">This project works, thanks to the above resources. Copyright &copy;2016 Tim Brockman</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<script async defer src="mostthethings.js"></script>
+
+
+
+
+
+<!--jsend-->
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDEVVmIWFHRlfayjnj6zwWbs72eUBRu2cs&callback=initMap"></script>
+  <script>
+//map stuff
+// Create a map variable
+var map;
+var styles = [
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#444444"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#f2f2f2"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 45
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#666666"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#333333"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#000000"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "saturation": "-100"
+            },
+            {
+                "lightness": "0"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#dedede"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    }
+];
+
+// Function to initialize the map within the map div
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 28.537211, lng: -81.377001},
+    zoom: 11,
+    styles:styles
+  });
+}
+</script>
+
+</body>
