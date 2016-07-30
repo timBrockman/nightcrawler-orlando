@@ -8,7 +8,9 @@
     "clean": "mkdir -p dist && touch dist/temp && rm -r dist/* && ls -a ./dist",
     "concat": "cat ./src/js/*.js > ./dist/mostthethings.js",
     "cp":"mkdir -p ./dist/css && cp ./src/css/* ./dist/css/",
-    "ised":"sed '/<!--jsstart-->/,/<!--jsend-->/ s/^.*<script.*\\\/script>//g' < ./src/index.html > ./dist/index.html && sed -i 's/<!--jsstart-->/<script async defer src=\\\"mostthethings.js\\\"><\\\/script>/g' ./dist/index.html"
+    "ised":"sed '/<!--jsstart-->/,/<!--jsend-->/ s/^.*<script.*\\\/script>//g' < ./src/index.html > ./dist/index.html && sed -i 's/<!--jsstart-->/<script async defer src=\\\"mostthethings.js\\\"><\\\/script>/g' ./dist/index.html",
+    "build":"npm run clean && npm run concat && npm run cp && npm run ised",
+    "deploy":"git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",
