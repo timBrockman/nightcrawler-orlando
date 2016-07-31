@@ -56,10 +56,10 @@ function alertContents() {
   }
 }
 /*/
-function makeRequest(url, cb){
+function makeRequest(url, cbCalls){
   $.ajax(url+'&jsoncallback=?',{format:'jsonp'})
     .done(function(data){
-       cb(data.query.results.CALLS.CALL);
+       cbCalls(data.query.results.CALLS.CALL);
        return true;
     });
 }
