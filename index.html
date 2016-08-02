@@ -45,9 +45,6 @@
     </nav>
     <div class="center legal">This project works, thanks to the above resources. Copyright &copy;2016 Tim Brockman</div>
   </footer>
-  <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
-  <script async defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
 <script async defer src="mostthethings.js"></script>
 
 
@@ -56,133 +53,132 @@
 
 <!--jsend-->
 
-  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDEVVmIWFHRlfayjnj6zwWbs72eUBRu2cs&callback=initMap"></script>
   <script>
-//map stuff
+//map (must load before map api callback)
 // Create a map variable
 var map;
 var geocode;
 var styles = [
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#f2f2f2"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 45
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#666666"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#333333"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#000000"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "saturation": "-100"
-            },
-            {
-                "lightness": "0"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#dedede"
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    }
+  {
+      "featureType": "administrative",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#444444"
+          }
+      ]
+  },
+  {
+      "featureType": "landscape",
+      "elementType": "all",
+      "stylers": [
+          {
+              "color": "#f2f2f2"
+          }
+      ]
+  },
+  {
+      "featureType": "poi",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "all",
+      "stylers": [
+          {
+              "saturation": -100
+          },
+          {
+              "lightness": 45
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "geometry.fill",
+      "stylers": [
+          {
+              "color": "#666666"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "geometry.stroke",
+      "stylers": [
+          {
+              "visibility": "on"
+          },
+          {
+              "color": "#333333"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "labels.text.fill",
+      "stylers": [
+          {
+              "color": "#000000"
+          }
+      ]
+  },
+  {
+      "featureType": "road",
+      "elementType": "labels.icon",
+      "stylers": [
+          {
+              "saturation": "-100"
+          },
+          {
+              "lightness": "0"
+          }
+      ]
+  },
+  {
+      "featureType": "road.highway",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "simplified"
+          }
+      ]
+  },
+  {
+      "featureType": "road.arterial",
+      "elementType": "labels.icon",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "transit",
+      "elementType": "all",
+      "stylers": [
+          {
+              "visibility": "off"
+          }
+      ]
+  },
+  {
+      "featureType": "water",
+      "elementType": "all",
+      "stylers": [
+          {
+              "color": "#dedede"
+          },
+          {
+              "visibility": "on"
+          }
+      ]
+  }
 ];
 //global markerIcons
 var markerIcons = [];
@@ -220,6 +216,10 @@ function initMap() {
   geocode = new google.maps.Geocoder();
   initIcons();
 }
-</script>
+  </script>
+
+  <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+  <script async defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDEVVmIWFHRlfayjnj6zwWbs72eUBRu2cs&callback=initMap"></script>
 
 </body>
