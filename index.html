@@ -61,6 +61,7 @@
 //map stuff
 // Create a map variable
 var map;
+var geocode;
 var styles = [
     {
         "featureType": "administrative",
@@ -183,7 +184,32 @@ var styles = [
         ]
     }
 ];
-
+//global markerIcons
+var markerIcons = [];
+//generate different map icons
+function initIcons(){
+  var iconUrls =[
+    "http://icons.iconarchive.com/icons/mad-science/arcade-saturdays/32/Shadow-Blinky-icon.png",
+    "http://icons.iconarchive.com/icons/mad-science/arcade-saturdays/32/Bashfull-Inky-icon.png",
+    "http://icons.iconarchive.com/icons/mad-science/arcade-saturdays/32/Pokey-Clyde-icon.png",
+    "http://icons.iconarchive.com/icons/mad-science/arcade-saturdays/32/Speedy-Pinky-icon.png",
+    "http://icons.iconarchive.com/icons/mad-science/arcade-saturdays/32/Edible-Ghost-icon.png",
+    "http://icons.iconarchive.com/icons/mad-science/arcade-saturdays/32/Strawberry-Bonus-icon.png",
+    "http://icons.iconarchive.com/icons/mad-science/arcade-saturdays/32/Onion-Bonus-icon.png"
+    ];
+  var max = iconsUrls.length;
+  for(var i = 0, i < max, i++){
+    markerIcons.push(makeIcons(iconUrls[i]));
+  }
+  function makeIcons(icon){
+    return new google.maps.MarkerImage(
+      icon,
+      new google.maps.Size(32, 32),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(0, 16)
+    );
+  }
+}
 // Function to initialize the map within the map div
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -191,6 +217,8 @@ function initMap() {
     zoom: 11,
     styles:styles
   });
+  geocode = new google.maps.Geocoder();
+  initIcons();
 }
 </script>
 

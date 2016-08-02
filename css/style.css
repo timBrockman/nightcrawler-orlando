@@ -7,8 +7,8 @@ html {
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
   font-size: 62.5%;/* 1rem = 10px ala skeleton*/
-  --bg-color:#dedede;
-  --color:#757575;
+  --bg-color:#999;
+  --color:#333;
   --hilight:#fff;
   --fancy:"courier new", courier, monospace;
 }
