@@ -17,7 +17,10 @@
         text:title,
         attr:{},
         style:{},
-        click:function(data){console.log(data.mid());}">loading 24 hour spots...</a>
+        click:function(data){console.log(data.mid);},
+        event:{
+          mouseover:mouseoverMarker,
+          mouseout:mouseoutMarker}">loading 24 hour spots...</a>
     </nav>
 	</header>
   <main>
@@ -182,6 +185,7 @@ var styles = [
 ];
 //global markerIcons
 var markerIcons = [];
+var spotMarkers = [];
 //generate different map icons
 function initIcons(){
   var iconUrls =[
@@ -195,9 +199,9 @@ function initIcons(){
     ];
   var max = iconUrls.length;
   for(var i = 0; i < max; i++){
-    markerIcons.push(makeIcons(iconUrls[i]));
+    markerIcons.push(makeIcon(iconUrls[i]));
   }
-  function makeIcons(icon){
+  function makeIcon(icon){
     return new google.maps.MarkerImage(
       icon,
       new google.maps.Size(32, 32),
@@ -206,6 +210,29 @@ function initIcons(){
     );
   }
 }
+/* move marker to model
+function mapSpot(spot){
+  //default spot icon markerIcons[5]
+  //highlight spot icon markerIcons[6]
+  var marker = new google.maps.Marker({
+            map:map,
+            position: {lat:spot.lat, lng:spot.lng},
+            title: spot.name,
+            animation: google.maps.Animation.DROP,
+            icon: markerIcons[5],
+            id: spot.markerId
+  });
+  // Two event listeners - one for mouseover, one for mouseout,
+  // to change the colors back and forth.
+  marker.addListener('mouseover', function() {
+    this.setIcon(markerIcons[6]);
+  });
+  marker.addListener('mouseout', function() {
+    this.setIcon(markerIcons[5]);
+  });
+  spotMarkers.push(marker);
+}
+*/
 // Function to initialize the map within the map div
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {

@@ -6,7 +6,22 @@ function SpotsVM(){
     ko.observableArray($.map(
       spots, function(item){
         item.markerId = 'spot'+ itemCount++;
-        return new Spot(item);//mmm banana
+        //mapSpot(item);
+        var currentSpot =  new Spot(item);//mmm banana
+        currentSpot.marker.addListener('mouseover', function() {
+          this.setIcon(markerIcons[6]);
+        });
+        currentSpot.marker.addListener('mouseout', function() {
+          this.setIcon(markerIcons[5]);
+        });
+        currentSpot.mouseoutMarker = function(){
+          currentSpot.marker.setIcon(markerIcons[5]);
+        };
+        currentSpot.mouseoverMarker = function(){
+          currentSpot.marker.setIcon(markerIcons[6]);
+        };
+
+        return currentSpot;
       }
     )
   );
