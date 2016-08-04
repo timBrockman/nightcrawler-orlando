@@ -507,14 +507,23 @@ function makeRequest(url, cbCalls){
 contains map functions including initMap
 */
 function Spot(data){
-  // not sure these need to be observable but, maybe want to add edit features some day
-  this.title = ko.observable(data.hasOwnProperty('name')?data.name:'unknown place');
-  this.phone = ko.observable(data.hasOwnProperty('phone')?data.phone:'no telephone number');
-  this.web   = ko.observable(data.hasOwnProperty('web')?data.web:'no website');
-  this.addy  = ko.observable(data.hasOwnProperty('addy')?data.addy:'no address');
-  this.lat   = ko.observable(data.hasOwnProperty('lat')?data.lat:0);
-  this.lng   = ko.observable(data.hasOwnProperty('lng')?data.lng:0);
-  this.mid   = ko.observable(data.hasOwnProperty('markerId')?data.markerId:0); // corresponds to marker id
+  // none of these need to be observable but, maybe want to add edit features some day
+  this.title  = data.hasOwnProperty('name')?data.name:'unknown place';
+  this.phone  = data.hasOwnProperty('phone')?data.phone:'no telephone number';
+  this.web    = data.hasOwnProperty('web')?data.web:'no website';
+  this.addy   = data.hasOwnProperty('addy')?data.addy:'no address';
+  this.lat    = data.hasOwnProperty('lat')?data.lat:28.537211;
+  this.lng    = data.hasOwnProperty('lng')?data.lng:-81.377001;
+  this.mid    = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
+  this.pos    = new google.maps.LatLng(this.lat, this.lng);
+  this.marker = new google.maps.Marker({
+    map: map,
+    position: this.pos,
+    title: this.title,
+    animation: google.maps.Animation.DROP,
+    icon: markerIcons[5],
+    id: this.mid
+  });
 }
 
 function Call(data){
@@ -527,8 +536,8 @@ function Call(data){
   this.dateTime = ko.observable(data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00');
   this.location = ko.observable(data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location');
   this.incidentId = ko.observable(data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id');
-  this.lat = ko.observable(data.hasOwnProperty('lat')?data.lat:'0');
-  this.lng = ko.observable(data.hasOwnProperty('lng')?data.lng:'0');
+  this.lat   = ko.observable(data.hasOwnProperty('lat')?data.lat:28.537211);
+  this.lng   = ko.observable(data.hasOwnProperty('lng')?data.lng:-81.377001);
   this.mid   = ko.observable(data.hasOwnProperty('markerId')?data.markerId:0); // corresponds to marker id
 }
 /*
@@ -566,7 +575,22 @@ function SpotsVM(){
     ko.observableArray($.map(
       spots, function(item){
         item.markerId = 'spot'+ itemCount++;
-        return new Spot(item);//mmm banana
+        //mapSpot(item);
+        var currentSpot =  new Spot(item);//mmm banana
+        currentSpot.marker.addListener('mouseover', function() {
+          this.setIcon(markerIcons[6]);
+        });
+        currentSpot.marker.addListener('mouseout', function() {
+          this.setIcon(markerIcons[5]);
+        });
+        currentSpot.mouseoutMarker = function(){
+          currentSpot.marker.setIcon(markerIcons[5]);
+        };
+        currentSpot.mouseoverMarker = function(){
+          currentSpot.marker.setIcon(markerIcons[6]);
+        };
+
+        return currentSpot;
       }
     )
   );
