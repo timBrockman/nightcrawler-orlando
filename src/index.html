@@ -30,9 +30,9 @@
       <ul data-bind="foreach:vmCalls">
         <li class="callItem" data-bind="
           text:description,
-          css:{accident: isAccident()},
+          css:{accident: isAccident},
           visible: filterAccident,
-          click:function(data){console.log(data.isAccident());}">loading calls...</li>
+          click:function(data){console.log(data.isAccident);}">loading calls...</li>
       </ul>
     </div>
     <div id="map"></div>

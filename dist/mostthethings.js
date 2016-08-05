@@ -528,17 +528,17 @@ function Spot(data){
 
 function Call(data){
   var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC:'');
-  this.isAccident = ko.observable(/Accident|Hit/i.test(accidentTemp));
-  this.filterAccident = ko.computed(function(){
+  this.isAccident = /Accident|Hit/i.test(accidentTemp);
+  this.filterAccident = function(){
     return (/Accident|Hit/i.test(accidentTemp) || !onlyAccidents());
-  });
-  this.description = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'unknown');
-  this.dateTime = ko.observable(data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00');
-  this.location = ko.observable(data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location');
-  this.incidentId = ko.observable(data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id');
-  this.lat   = ko.observable(data.hasOwnProperty('lat')?data.lat:28.537211);
-  this.lng   = ko.observable(data.hasOwnProperty('lng')?data.lng:-81.377001);
-  this.mid   = ko.observable(data.hasOwnProperty('markerId')?data.markerId:0); // corresponds to marker id
+  };
+  this.description = data.hasOwnProperty('DESC')?data.DESC:'unknown';
+  this.dateTime = data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00';
+  this.location = data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location';
+  this.incidentId = data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id';
+  this.lat   = data.hasOwnProperty('lat')?data.lat:28.537211;
+  this.lng   = data.hasOwnProperty('lng')?data.lng:-81.377001;
+  this.mid   = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
 }
 /*
 apply vms to views, inits, etc.
@@ -563,8 +563,10 @@ function cbCalls(data){
 };
 // async defered still blocks onload event ensuring nonrace
 window.onload = function(){
-  //todo: createMarkers(spots)
+  //todo: info windows & related events
   ko.applyBindings(SpotsVM, document.getElementById('header'));
+
+  //applies bindings in callback
   makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cbCalls);
 };
 function SpotsVM(){
@@ -600,12 +602,14 @@ function CallsVM(){
   var itemCount = 0;
 
   self.onlyAccidents = ko.observable(false);
-
   self.vmCalls =
     ko.observableArray($.map(
       mCalls, function(item){
         item.markerId = 'call'+ itemCount++;
-        return new Call(item);
+        var currentCall = new Call(item);
+        //todo: add event listeners as above
+
+        return currentCall;
       }
     )
   );

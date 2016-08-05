@@ -31,12 +31,14 @@ function CallsVM(){
   var itemCount = 0;
 
   self.onlyAccidents = ko.observable(false);
-
   self.vmCalls =
     ko.observableArray($.map(
       mCalls, function(item){
         item.markerId = 'call'+ itemCount++;
-        return new Call(item);
+        var currentCall = new Call(item);
+        //todo: add event listeners as above
+
+        return currentCall;
       }
     )
   );

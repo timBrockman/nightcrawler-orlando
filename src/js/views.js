@@ -21,7 +21,9 @@ function cbCalls(data){
 };
 // async defered still blocks onload event ensuring nonrace
 window.onload = function(){
-  //todo: createMarkers(spots)
+  //todo: info windows & related events
   ko.applyBindings(SpotsVM, document.getElementById('header'));
+
+  //applies bindings in callback
   makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cbCalls);
 };

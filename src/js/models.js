@@ -20,15 +20,15 @@ function Spot(data){
 
 function Call(data){
   var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC:'');
-  this.isAccident = ko.observable(/Accident|Hit/i.test(accidentTemp));
-  this.filterAccident = ko.computed(function(){
+  this.isAccident = /Accident|Hit/i.test(accidentTemp);
+  this.filterAccident = function(){
     return (/Accident|Hit/i.test(accidentTemp) || !onlyAccidents());
-  });
-  this.description = ko.observable(data.hasOwnProperty('DESC')?data.DESC:'unknown');
-  this.dateTime = ko.observable(data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00');
-  this.location = ko.observable(data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location');
-  this.incidentId = ko.observable(data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id');
-  this.lat   = ko.observable(data.hasOwnProperty('lat')?data.lat:28.537211);
-  this.lng   = ko.observable(data.hasOwnProperty('lng')?data.lng:-81.377001);
-  this.mid   = ko.observable(data.hasOwnProperty('markerId')?data.markerId:0); // corresponds to marker id
+  };
+  this.description = data.hasOwnProperty('DESC')?data.DESC:'unknown';
+  this.dateTime = data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00';
+  this.location = data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location';
+  this.incidentId = data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id';
+  this.lat   = data.hasOwnProperty('lat')?data.lat:28.537211;
+  this.lng   = data.hasOwnProperty('lng')?data.lng:-81.377001;
+  this.mid   = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
 }
