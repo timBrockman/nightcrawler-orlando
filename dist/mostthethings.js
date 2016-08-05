@@ -529,9 +529,9 @@ function Spot(data){
 function Call(data){
   var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC:'');
   this.isAccident = /Accident|Hit/i.test(accidentTemp);
-  this.filterAccident = function(){
+  this.filterAccident = ko.computed(function(){
     return (/Accident|Hit/i.test(accidentTemp) || !onlyAccidents());
-  };
+  });
   this.description = data.hasOwnProperty('DESC')?data.DESC:'unknown';
   this.dateTime = data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00';
   this.location = data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location';
