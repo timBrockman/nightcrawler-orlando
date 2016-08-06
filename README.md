@@ -6,7 +6,7 @@
   - Hang out at the local 24 hour places.
   - Respond to local dispatch calls from the city.
   - Be the first reporter on the scene to get the 'money shot'.
-  - Ugly palm/newton looking design with retro game icons.
+  - Retro design with classic game icons.
 
 ##Running the project
   Simply visit the demo page at [https://timBrockman.github.io/nightcrawler-orlando](https://timBrockman.github.io/nightcrawler-orlando).
