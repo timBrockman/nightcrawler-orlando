@@ -24,6 +24,10 @@ function Call(data){
   this.filterAccident = ko.computed(function(){
     return (/Accident|Hit/i.test(accidentTemp) || !onlyAccidents());
   });
+
+  //todo: geocoding function (callback to set lat/lng)
+  //todo: marker function (needs geocoding)
+  
   this.description = data.hasOwnProperty('DESC')?data.DESC:'unknown';
   this.dateTime = data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00';
   this.location = data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location';

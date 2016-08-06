@@ -7,9 +7,9 @@ html {
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
   font-size: 62.5%;/* 1rem = 10px ala skeleton*/
-  --bg-color:#999;
-  --color:#333;
-  --hilight:#fff;
+  --bg-color:#000;
+  --color:#0f0;
+  --hilight:#f00;
   --fancy:"courier new", courier, monospace;
 }
 body{
@@ -33,6 +33,10 @@ nav{
   flex-flow: row wrap;
   justify-content: space-around;
   align-content: space-around;
+}
+hr{
+  color:green;
+  color:--color;
 }
 .navItem{
   min-width: 160px;
