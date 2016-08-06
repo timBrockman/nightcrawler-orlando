@@ -35,8 +35,10 @@ nav{
   align-content: space-around;
 }
 hr{
-  color:green;
-  color:--color;
+  border:0;
+  height:2px;
+  background:green;
+  background:var(--color);
 }
 .navItem{
   min-width: 160px;
