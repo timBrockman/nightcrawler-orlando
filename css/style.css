@@ -81,7 +81,7 @@ footer {
   flex: 1 1 auto;
   min-width: 320px;
   min-height: calc(100vh - 150px);
-  background-color: #000;
+  background-color: black;
   background-color: var(--bg-color);
   box-sizing: border-box;
   border: solid 5px black;
