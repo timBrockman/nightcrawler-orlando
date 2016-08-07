@@ -28,18 +28,15 @@ function SpotsVM(){
 }
 function CallsVM(){
   var self = this;
-  var itemCount = 0;
+  //var itemCount = mCalls.length;
 
   self.onlyAccidents = ko.observable(false);
-  self.vmCalls =
-    ko.observableArray($.map(
-      mCalls, function(item){
-        item.markerId = 'call'+ itemCount++;
-        var currentCall = new Call(item);
-        //todo: add event listeners as above
-
-        return currentCall;
-      }
-    )
-  );
+  self.vmCalls = ko.observableArray();
+  for(var i = 0; i < 10; i++){
+    mCalls[i].markerId = 'call'+ i;
+    mCalls[i].randIcon = Math.floor(Math.random() * 4);
+    var currentCall = new Call(mCalls[i]);
+    // add events as above
+    self.vmCalls.push(currentCall);
+  }
 }

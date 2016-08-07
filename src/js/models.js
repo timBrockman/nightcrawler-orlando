@@ -19,20 +19,53 @@ function Spot(data){
 }
 
 function Call(data){
-  var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC:'');
-  this.isAccident = /Accident|Hit/i.test(accidentTemp);
-  this.filterAccident = ko.computed(function(){
-    return (/Accident|Hit/i.test(accidentTemp) || !onlyAccidents());
+  var _self = this;
+  var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC.trim():'');
+  _self.isAccident = /Accident|Hit|Vehicle|Car|Traffic/i.test(accidentTemp);
+  _self.filterAccident = ko.computed(function(){
+    return (/Accident|Hit|Vehicle|Car|Traffic/i.test(accidentTemp) || !onlyAccidents());
   });
 
   //todo: geocoding function (callback to set lat/lng)
   //todo: marker function (needs geocoding)
-  
-  this.description = data.hasOwnProperty('DESC')?data.DESC:'unknown';
-  this.dateTime = data.hasOwnProperty('DATE')?data.DATE:'1/1/1970 00:00';
-  this.location = data.hasOwnProperty('LOCATION')?data.LOCATION:'unknown location';
-  this.incidentId = data.hasOwnProperty('INCIDENT')?data.INCIDENT:'no id';
-  this.lat   = data.hasOwnProperty('lat')?data.lat:28.537211;
-  this.lng   = data.hasOwnProperty('lng')?data.lng:-81.377001;
-  this.mid   = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
+  var rawLocation   = data.hasOwnProperty('LOCATION')?data.LOCATION.trim():'unknown location';
+
+  _self.description = data.hasOwnProperty('DESC')?data.DESC.trim():'unknown';
+  _self.dateTime    = data.hasOwnProperty('DATE')?data.DATE.trim():'1/1/1970 00:00';
+  _self.incidentId  = data.hasOwnProperty('INCIDENT')?data.INCIDENT.trim():'no id';
+  _self.randIcon    = data.randIcon;
+  _self.mid         = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
+  //_self.tries       = 0;
+  //process location for geocoder by formatting and adding component restrictions
+  function processLocation(_rawLocation){
+    var location = {};
+    location.address = _rawLocation.replace('\/','\&');
+    location.address = location.address + ', Orlando, FL';
+    return location;
+  }
+  // geocode street address
+  geocodeLocation(processLocation(rawLocation));
+  function geocodeLocation(_location){
+    geocoder.geocode(_location,function(results,status){
+      if (status === google.maps.GeocoderStatus.OK) {
+        _self.lat = results[0].geometry.location.lat();
+        _self.lng = results[0].geometry.location.lng();
+        _self.address = results[0].formatted_address;
+        _self.pid =  results[0].place_id;
+        _self.pos    = new google.maps.LatLng(_self.lat, _self.lng);
+        _self.marker = new google.maps.Marker({
+          map: map,
+          position: _self.pos,
+          title: _self.description,
+          animation: google.maps.Animation.DROP,
+          icon: markerIcons[_self.randIcon],
+          id: _self.mid
+        });
+      }else{
+        console.log('There seems to be a problem: ' + status);
+      }
+      //console.log(_self.mid);
+    });
+  }
+
 }

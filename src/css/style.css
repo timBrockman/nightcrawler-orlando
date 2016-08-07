@@ -139,7 +139,7 @@ input[type="checkbox"] + label:before{
 
 }
 input[type="checkbox"]:checked + label:before{
-  content:'\1F4A5 \0020 Accident';
+  content:'\1F4A5 \0020 Traffic ';
 }
 
 li.accident::before{content: "\1F4A5\0020";}
