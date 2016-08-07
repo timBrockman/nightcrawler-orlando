@@ -44,9 +44,9 @@ function Call(data){
     return location;
   }
   // geocode street address
-  geocodeLocation(processLocation(rawLocation));
-  function geocodeLocation(_location){
-    geocoder.geocode(_location,function(results,status){
+  //geocodeLocation(processLocation(rawLocation));
+  //function geocodeLocation(_location){
+    geocoder.geocode(processLocation(rawLocation),function(results,status){
       if (status === google.maps.GeocoderStatus.OK) {
         _self.lat = results[0].geometry.location.lat();
         _self.lng = results[0].geometry.location.lng();
@@ -61,11 +61,18 @@ function Call(data){
           icon: markerIcons[_self.randIcon],
           id: _self.mid
         });
+        _self.marker.addListener('mouseover', function() {
+          this.setIcon(markerIcons[4]);
+        });
+        _self.marker.addListener('mouseout', function() {
+          this.setIcon(markerIcons[_self.randIcon]);
+        });
+
       }else{
         console.log('There seems to be a problem: ' + status);
       }
       //console.log(_self.mid);
     });
-  }
+  //}
 
 }

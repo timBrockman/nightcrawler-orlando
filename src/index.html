@@ -32,7 +32,10 @@
           text:description,
           css:{accident: isAccident},
           visible: filterAccident,
-          click:function(data){console.log(data.isAccident);}">loading calls...</li>
+          click:function(data){console.log(data.isAccident);},
+          event:{
+            mouseover:mouseoverMarker,
+            mouseout:mouseoutMarker}">loading calls...</li>
       </ul>
     </div>
     <div id="map"></div>
@@ -137,29 +140,6 @@ function initIcons(){
     );
   }
 }
-/* move marker to model
-function mapSpot(spot){
-  //default spot icon markerIcons[5]
-  //highlight spot icon markerIcons[6]
-  var marker = new google.maps.Marker({
-            map:map,
-            position: {lat:spot.lat, lng:spot.lng},
-            title: spot.name,
-            animation: google.maps.Animation.DROP,
-            icon: markerIcons[5],
-            id: spot.markerId
-  });
-  // Two event listeners - one for mouseover, one for mouseout,
-  // to change the colors back and forth.
-  marker.addListener('mouseover', function() {
-    this.setIcon(markerIcons[6]);
-  });
-  marker.addListener('mouseout', function() {
-    this.setIcon(markerIcons[5]);
-  });
-  spotMarkers.push(marker);
-}
-*/
 // Function to initialize the map within the map div
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {

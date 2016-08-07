@@ -28,15 +28,26 @@ function SpotsVM(){
 }
 function CallsVM(){
   var self = this;
-  //var itemCount = mCalls.length;
+  var itemCount = 0;
 
   self.onlyAccidents = ko.observable(false);
-  self.vmCalls = ko.observableArray();
-  for(var i = 0; i < 10; i++){
-    mCalls[i].markerId = 'call'+ i;
-    mCalls[i].randIcon = Math.floor(Math.random() * 4);
-    var currentCall = new Call(mCalls[i]);
-    // add events as above
-    self.vmCalls.push(currentCall);
-  }
+  self.vmCalls = ko.observableArray(
+    $.map(mCalls, function(item){
+      if(itemCount<10){
+        item.markerId = 'call'+ itemCount++;
+        item.randIcon = Math.floor(Math.random() * 4);
+        var currentCall = new Call(item);
+        // event listeners added to models
+        //*
+        currentCall.mouseoutMarker = function(){
+          currentCall.marker.setIcon(markerIcons[currentCall.randIcon]);
+        };
+        currentCall.mouseoverMarker = function(){
+          currentCall.marker.setIcon(markerIcons[4]);
+        };
+        return currentCall;
+      }
+    })
+  );
+
 }

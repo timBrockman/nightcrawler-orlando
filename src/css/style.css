@@ -108,10 +108,13 @@ li{
   font-weight:normal;
   border-bottom: solid 1px red;
   border-bottom:solid 1px var(--color);
-  padding: .5em;
+  padding: .75em .5em;
   font-size: 1em;
   line-height: 1em;
   cursor:pointer;
+}
+li:hover{
+  color:var(--hilight);
 }
 input[type="checkbox"]{
   color: inherit;
