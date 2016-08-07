@@ -67,7 +67,6 @@ function Call(data){
         _self.marker.addListener('mouseout', function() {
           this.setIcon(markerIcons[_self.randIcon]);
         });
-
       }else{
         console.log('There seems to be a problem: ' + status);
       }

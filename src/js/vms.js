@@ -38,7 +38,7 @@ function CallsVM(){
         item.randIcon = Math.floor(Math.random() * 4);
         var currentCall = new Call(item);
         // event listeners added to models
-        //*
+        
         currentCall.mouseoutMarker = function(){
           currentCall.marker.setIcon(markerIcons[currentCall.randIcon]);
         };
