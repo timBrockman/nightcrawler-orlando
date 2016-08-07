@@ -575,7 +575,6 @@ function Call(data){
         _self.marker.addListener('mouseout', function() {
           this.setIcon(markerIcons[_self.randIcon]);
         });
-
       }else{
         console.log('There seems to be a problem: ' + status);
       }
@@ -655,7 +654,7 @@ function CallsVM(){
         item.randIcon = Math.floor(Math.random() * 4);
         var currentCall = new Call(item);
         // event listeners added to models
-        //*
+        
         currentCall.mouseoutMarker = function(){
           currentCall.marker.setIcon(markerIcons[currentCall.randIcon]);
         };
