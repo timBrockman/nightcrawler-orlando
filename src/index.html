@@ -25,7 +25,11 @@
 	</header>
   <main>
     <div id="callBox">
-      <div class="center">Filter: <input id="accidentFilter" type="checkbox" data-bind="checked:onlyAccidents" />
+      <div class="center">Filter:
+        <input id="accidentFilter"
+          type="checkbox"
+          data-bind="checked:onlyAccidents,
+          event:{change:hideGenCalls}" />
       <label for="accidentFilter"> Calls</label></div>
       <ul data-bind="foreach:vmCalls">
         <li class="callItem" data-bind="

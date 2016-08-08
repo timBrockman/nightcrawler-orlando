@@ -46,32 +46,34 @@ function Call(data){
   // geocode street address
   //geocodeLocation(processLocation(rawLocation));
   //function geocodeLocation(_location){
-    geocoder.geocode(processLocation(rawLocation),function(results,status){
-      if (status === google.maps.GeocoderStatus.OK) {
-        _self.lat = results[0].geometry.location.lat();
-        _self.lng = results[0].geometry.location.lng();
-        _self.address = results[0].formatted_address;
-        _self.pid =  results[0].place_id;
-        _self.pos    = new google.maps.LatLng(_self.lat, _self.lng);
-        _self.marker = new google.maps.Marker({
-          map: map,
-          position: _self.pos,
-          title: _self.description,
-          animation: google.maps.Animation.DROP,
-          icon: markerIcons[_self.randIcon],
-          id: _self.mid
-        });
-        _self.marker.addListener('mouseover', function() {
-          this.setIcon(markerIcons[4]);
-        });
-        _self.marker.addListener('mouseout', function() {
-          this.setIcon(markerIcons[_self.randIcon]);
-        });
-      }else{
-        console.log('There seems to be a problem: ' + status);
-      }
-      //console.log(_self.mid);
-    });
+  geocoder.geocode(processLocation(rawLocation),function(results,status){
+    if (status === google.maps.GeocoderStatus.OK) {
+      _self.lat = results[0].geometry.location.lat();
+      _self.lng = results[0].geometry.location.lng();
+      _self.address = results[0].formatted_address;
+      _self.pid =  results[0].place_id;
+      _self.pos    = new google.maps.LatLng(_self.lat, _self.lng);
+      _self.marker = new google.maps.Marker({
+        map: map,
+        position: _self.pos,
+        title: _self.description,
+        animation: google.maps.Animation.DROP,
+        icon: markerIcons[_self.randIcon],
+        id: _self.mid
+      });
+      _self.marker.addListener('mouseover', function() {
+        this.setIcon(markerIcons[4]);
+      });
+      _self.marker.addListener('mouseout', function() {
+        this.setIcon(markerIcons[_self.randIcon]);
+      });
+
+    }else{
+      console.log('There seems to be a problem: ' + status);
+    }
+    //console.log(_self.mid);
+  });
+
   //}
 
 }

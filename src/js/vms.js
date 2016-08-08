@@ -26,11 +26,13 @@ function SpotsVM(){
     )
   );
 }
+
 function CallsVM(){
   var self = this;
   var itemCount = 0;
 
   self.onlyAccidents = ko.observable(false);
+
   self.vmCalls = ko.observableArray(
     $.map(mCalls, function(item){
       if(itemCount<10){
@@ -38,16 +40,24 @@ function CallsVM(){
         item.randIcon = Math.floor(Math.random() * 4);
         var currentCall = new Call(item);
         // event listeners added to models
-        
+
         currentCall.mouseoutMarker = function(){
           currentCall.marker.setIcon(markerIcons[currentCall.randIcon]);
         };
         currentCall.mouseoverMarker = function(){
           currentCall.marker.setIcon(markerIcons[4]);
         };
+        currentCall.hideMarker = function(){
+          currentCall.marker.setVisible(currentCall.filterAccident());
+        };
+
         return currentCall;
       }
     })
   );
-
+  self.hideGenCalls = function(){
+    self.vmCalls().forEach(function(item){
+      item.hideMarker();
+    });
+  };
 }
