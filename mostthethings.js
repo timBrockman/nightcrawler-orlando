@@ -1,6 +1,6 @@
 spots = [
     {name: "Wawa", lat: 28.552518, lng: -81.396461, phone:"(407) 835-8985", web:"wawa.com", addy: "1200 W Colonial Dr, Orlando, FL 32805"},
-    {name: "7-Eleven", lat: 28.553298, lng: -81.388185, phone:"", web:"", addy: "605 West Colonial Drive, Orlando, FL 32804"},
+    {name: "7-Eleven", lat: 28.553298, lng: -81.388185, phone:"(407) 650-1965", web:"7-eleven.com", addy: "605 West Colonial Drive, Orlando, FL 32804"},
     {name: "IHOP", lat: 28.553471, lng: -81.368959, phone:"(407) 896-8313", web: "restaurants.ihop.com", addy: "647 E Colonial Dr, Orlando, FL 32803"},
     {name: "Steak-n-Shake", lat: 28.552888, lng: -81.347269, phone: "(407) 896-0827", web: "steaknshake.com", addy: "2820 E Colonial Dr, Orlando, FL 32803"},
     {name: "McDonald's", lat: 28.503997, lng: -81.396276, phone: "(407) 839-3840", web: "mcdonalds.com", addy: "3839 Orange Blossom Trail, Orlando, FL 32839"}
@@ -524,6 +524,15 @@ function Spot(data){
     icon: markerIcons[5],
     id: this.mid
   });
+  this.infowindow =  new google.maps.InfoWindow({
+    content:(
+      "<strong>"+this.title+"</strong><br>"+
+      this.phone + "<br>"+
+      '<a href="http://'+this.web+'" target="blank">'+this.web+"</a><br>" +
+      this.addy
+    )
+  });
+
 }
 
 function Call(data){
@@ -574,6 +583,16 @@ function Call(data){
       });
       _self.marker.addListener('mouseout', function() {
         this.setIcon(markerIcons[_self.randIcon]);
+      });
+      _self.infowindow =  new google.maps.InfoWindow({
+        content:(
+          "<strong>"+_self.description+"</strong><br>"+
+          _self.dateTime + "<br>"+
+          _self.address + "<br>"
+        )
+      });
+      _self.marker.addListener('click', function() {
+        _self.infowindow.open(map, this);
       });
 
     }else{
@@ -632,11 +651,17 @@ function SpotsVM(){
         currentSpot.marker.addListener('mouseout', function() {
           this.setIcon(markerIcons[5]);
         });
+        currentSpot.marker.addListener('click', function(){
+          currentSpot.infowindow.open(map, currentSpot.marker);
+        });
         currentSpot.mouseoutMarker = function(){
           currentSpot.marker.setIcon(markerIcons[5]);
         };
         currentSpot.mouseoverMarker = function(){
           currentSpot.marker.setIcon(markerIcons[6]);
+        };
+        currentSpot.clickMarker = function(){
+          currentSpot.infowindow.open(map, currentSpot.marker);
         };
 
         return currentSpot;
@@ -667,6 +692,9 @@ function CallsVM(){
         };
         currentCall.hideMarker = function(){
           currentCall.marker.setVisible(currentCall.filterAccident());
+        };
+        currentCall.clickMarker = function(){
+          currentCall.infowindow.open(map, currentCall.marker);
         };
 
         return currentCall;
