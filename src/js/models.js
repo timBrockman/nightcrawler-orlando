@@ -16,6 +16,15 @@ function Spot(data){
     icon: markerIcons[5],
     id: this.mid
   });
+  this.infowindow =  new google.maps.InfoWindow({
+    content:(
+      "<strong>"+this.title+"</strong><br>"+
+      this.phone + "<br>"+
+      '<a href="http://'+this.web+'" target="blank">'+this.web+"</a><br>" +
+      this.addy
+    )
+  });
+
 }
 
 function Call(data){
@@ -66,6 +75,16 @@ function Call(data){
       });
       _self.marker.addListener('mouseout', function() {
         this.setIcon(markerIcons[_self.randIcon]);
+      });
+      _self.infowindow =  new google.maps.InfoWindow({
+        content:(
+          "<strong>"+_self.description+"</strong><br>"+
+          _self.dateTime + "<br>"+
+          _self.address + "<br>"
+        )
+      });
+      _self.marker.addListener('click', function() {
+        _self.infowindow.open(map, this);
       });
 
     }else{

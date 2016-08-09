@@ -14,11 +14,17 @@ function SpotsVM(){
         currentSpot.marker.addListener('mouseout', function() {
           this.setIcon(markerIcons[5]);
         });
+        currentSpot.marker.addListener('click', function(){
+          currentSpot.infowindow.open(map, currentSpot.marker);
+        });
         currentSpot.mouseoutMarker = function(){
           currentSpot.marker.setIcon(markerIcons[5]);
         };
         currentSpot.mouseoverMarker = function(){
           currentSpot.marker.setIcon(markerIcons[6]);
+        };
+        currentSpot.clickMarker = function(){
+          currentSpot.infowindow.open(map, currentSpot.marker);
         };
 
         return currentSpot;
@@ -49,6 +55,9 @@ function CallsVM(){
         };
         currentCall.hideMarker = function(){
           currentCall.marker.setVisible(currentCall.filterAccident());
+        };
+        currentCall.clickMarker = function(){
+          currentCall.infowindow.open(map, currentCall.marker);
         };
 
         return currentCall;

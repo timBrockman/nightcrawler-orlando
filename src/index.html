@@ -17,7 +17,7 @@
         text:title,
         attr:{},
         style:{},
-        click:function(data){console.log(data.mid);},
+        click:clickMarker,
         event:{
           mouseover:mouseoverMarker,
           mouseout:mouseoutMarker}">loading 24 hour spots...</a>
@@ -36,7 +36,7 @@
           text:description,
           css:{accident: isAccident},
           visible: filterAccident,
-          click:function(data){console.log(data.isAccident);},
+          click:clickMarker,
           event:{
             mouseover:mouseoverMarker,
             mouseout:mouseoutMarker}">loading calls...</li>
@@ -144,6 +144,7 @@ function initIcons(){
     );
   }
 }
+
 // Function to initialize the map within the map div
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
