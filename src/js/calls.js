@@ -19,3 +19,5 @@ function makeRequest(url, cbCalls){
       console.log(data);
     });
 }
+// holds raw calls to map in vm using model constructors
+var mCalls = [];

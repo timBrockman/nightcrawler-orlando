@@ -1,9 +1,8 @@
 /*
 views.js
 contains the onload stuff
-triggering functions and callbacks that applyBindings 
+triggering functions and callbacks that applyBindings
 */
-var mCalls = [];
 var applied = false; //incase callback triggered twice or something
 function cbCalls(data){
   mCalls = data;

@@ -27,19 +27,18 @@
     - `npm run ised`: replaces js file references
   - use `npm run deploy` to deploy dist subrepo to gh-pages
 
-###m
+###m (models.js, 247.js, calls.js)
+  - model constructors for spots and calls
   - starting locations in spots array (247.js)
   - active dispatch calls (xml -> yml:json)
 
-###vm
-  - spotsVM
-  - callsVM
+###vm (vms.js)
+  - SpotsVM: constructor for 24 hour spots view model
+  - CallsVM: constructor for 911 dispatch calls view model and filter observable/behaviors
 
-###v
-  - wrapper
-  - starting location list (ko)
-  - map
-  - active calls list (ko)
+###v (index.html, view.js)
+  - index.html
+  - view.js: the window.onload triggering that kicks off after all the async deferred is loaded
 
 ###map
-separate map related calls (like geocoding)
+separate map related functions, methods, and properties (like initMap)
