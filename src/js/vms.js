@@ -1,7 +1,18 @@
+/*
+vms.js
+knockout view model class constructors
+*/
+/*
+SpotsVM view model constructor
+----
+contains vmSpots, a knockout observable array
+jquery maps the raw spots data to the model,
+adds behavior functions and listeners,
+and returns each as a member of observable array
+*/
 function SpotsVM(){
-  var self = this;
+  //var _self = this; //unused
   var itemCount = 0; //derp
-
   self.vmSpots =
     ko.observableArray($.map(
       spots, function(item){
@@ -32,7 +43,16 @@ function SpotsVM(){
     )
   );
 }
-
+/*
+CallsVM view model constructor
+----
+contains onlyAccidents filter observable
+contains hideGenCalls method/behavior for when filter is triggered
+contains vmCalls, a knockout observable array
+jquery maps the raw spots data to the model,
+adds behavior functions,
+and returns each as a member of observable array
+*/
 function CallsVM(){
   var self = this;
   var itemCount = 0;

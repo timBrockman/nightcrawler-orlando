@@ -1,5 +1,20 @@
+/*
+models.js
+Knockout model class constructors
+*/
+
+/*
+Spot class constructor
+----
+takes a raw data object from 247.js's spots array
+tests for and attaches all the properties
+---
+creates pos LatLng property
+creates marker property
+creates infowindow property
+*/
 function Spot(data){
-  // none of these need to be observable but, maybe want to add edit features some day
+  // none of these need to be observable but, maybe want to add editable features some day
   this.title  = data.hasOwnProperty('name')?data.name:'unknown place';
   this.phone  = data.hasOwnProperty('phone')?data.phone:'no telephone number';
   this.web    = data.hasOwnProperty('web')?data.web:'no website';
@@ -26,7 +41,18 @@ function Spot(data){
   });
 
 }
+/*
+Call class constructor
+----
+takes raw 911 dispatch call data from calls.js
+tests for and attaches the raw properties
+---
+creates and filters for isAccident boolean property
+creates pos and address from geocodes address or intersection
+creates marker and listeners
+creates infowindow
 
+*/
 function Call(data){
   var _self = this;
   var accidentTemp = (data.hasOwnProperty('DESC')?data.DESC.trim():'');
@@ -35,8 +61,7 @@ function Call(data){
     return (/Accident|Hit|Vehicle|Car|Traffic/i.test(accidentTemp) || !onlyAccidents());
   });
 
-  //todo: geocoding function (callback to set lat/lng)
-  //todo: marker function (needs geocoding)
+
   var rawLocation   = data.hasOwnProperty('LOCATION')?data.LOCATION.trim():'unknown location';
 
   _self.description = data.hasOwnProperty('DESC')?data.DESC.trim():'unknown';
@@ -44,8 +69,8 @@ function Call(data){
   _self.incidentId  = data.hasOwnProperty('INCIDENT')?data.INCIDENT.trim():'no id';
   _self.randIcon    = data.randIcon;
   _self.mid         = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
-  //_self.tries       = 0;
-  //process location for geocoder by formatting and adding component restrictions
+
+  //process location for geocoder by formatting ---not adding component restrictions---
   function processLocation(_rawLocation){
     var location = {};
     location.address = _rawLocation.replace('\/','\&');
@@ -53,8 +78,6 @@ function Call(data){
     return location;
   }
   // geocode street address
-  //geocodeLocation(processLocation(rawLocation));
-  //function geocodeLocation(_location){
   geocoder.geocode(processLocation(rawLocation),function(results,status){
     if (status === google.maps.GeocoderStatus.OK) {
       _self.lat = results[0].geometry.location.lat();
@@ -90,9 +113,5 @@ function Call(data){
     }else{
       console.log('There seems to be a problem: ' + status);
     }
-    //console.log(_self.mid);
   });
-
-  //}
-
 }
