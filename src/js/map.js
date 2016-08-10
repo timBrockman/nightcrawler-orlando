@@ -96,12 +96,12 @@ function initMap() {
   //mapInited = true;
 /*
 apply bindings moved to Map Init
-*/
+(moved to window.onload due to async ko & jquery from cdn often being slower than maps)
   ko.applyBindings(SpotsVM, document.getElementById('header'));
   makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cbCalls);
   function cbCalls(data){
     mCalls = data;
     ko.applyBindings(CallsVM, document.getElementById('callBox'));
   };
-
+*/
 }
