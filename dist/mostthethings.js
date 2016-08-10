@@ -27,8 +27,8 @@ function makeRequest(url, cbCalls){
        cbCalls(data.query.results.CALLS.CALL);
        return true;
     })
-    .fail(function(data){
-      console.log(data);
+    .fail(function(status){
+      window.alert("I'd like to think if you're having the worst day of your life.  Refresh the app to clear up the:" + status?status:' unknown problem');
     });
 }
 // holds raw calls to map in vm using model constructors
@@ -39,6 +39,7 @@ contains map settings and functions including initMap()
 (must load before map api callback)
 */
 var map;
+var mapInited = false;
 var geocoder;
 var markerIcons = [];
 var spotMarkers = [];
@@ -125,6 +126,7 @@ function initMap() {
   });
   geocoder = new google.maps.Geocoder();
   initIcons();
+  mapInited = true;
 }
 /*
 models.js
@@ -239,7 +241,7 @@ function Call(data){
       });
 
     }else{
-      console.log('There seems to be a problem: ' + status);
+      window.alert("I'd like to think if you're having the worst day of your life. Try refreshing to fix the: " + status);
     }
   });
 }
@@ -261,8 +263,11 @@ window.onload = function(){
 
   //applies bindings in callback after other crap loads
   window.setTimeout(function () {
-      ko.applyBindings(SpotsVM, document.getElementById('header'));
-      makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cbCalls);
+    if(mapInited != true){
+      window.alert("I'd like to think if you're having the worst day of your life. The map is fouled up. Wait a few moments, then refresh this app.");
+    }
+    ko.applyBindings(SpotsVM, document.getElementById('header'));
+    makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cbCalls);
   }, 1000);
 };
 /*
@@ -278,7 +283,7 @@ adds behavior functions and listeners,
 and returns each as a member of observable array
 */
 function SpotsVM(){
-  //var _self = this; //unused
+  var self = this; //unused
   var itemCount = 0; //derp
   self.vmSpots =
     ko.observableArray($.map(
