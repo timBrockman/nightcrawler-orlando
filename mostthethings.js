@@ -153,6 +153,7 @@ function Spot(data){
   this.lng    = data.hasOwnProperty('lng')?data.lng:-81.377001;
   this.mid    = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
   this.pos    = new google.maps.LatLng(this.lat, this.lng);
+  this.clickToggle = false;
   this.marker = new google.maps.Marker({
     map: map,
     position: this.pos,
@@ -199,6 +200,7 @@ function Call(data){
   _self.incidentId  = data.hasOwnProperty('INCIDENT')?data.INCIDENT.trim():'no id';
   _self.randIcon    = data.randIcon;
   _self.mid         = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
+  _self.clickToggle = false;
 
   //process location for geocoder by formatting ---not adding component restrictions---
   function processLocation(_rawLocation){
@@ -237,7 +239,14 @@ function Call(data){
         )
       });
       _self.marker.addListener('click', function() {
-        _self.infowindow.open(map, this);
+        _self.clickToggle = !_self.clickToggle;
+        if(_self.clickToggle){
+          _self.infowindow.open(map, _self.marker);
+          _self.marker.setAnimation(google.maps.Animation.BOUNCE);
+        }else{
+          _self.infowindow.close(map, _self.marker);
+          _self.marker.setAnimation(null);
+        }
       });
 
     }else{
@@ -298,7 +307,14 @@ function SpotsVM(){
           this.setIcon(markerIcons[5]);
         });
         currentSpot.marker.addListener('click', function(){
-          currentSpot.infowindow.open(map, currentSpot.marker);
+          currentCall.clickToggle = !currentCall.clickToggle;
+          if(currentCall.clickToggle){
+            currentCall.infowindow.open(map, currentCall.marker);
+            currentCall.marker.setAnimation(google.maps.Animation.BOUNCE);
+          }else{
+            currentCall.infowindow.close(map, currentCall.marker);
+            currentCall.marker.setAnimation(null);
+          }
         });
         currentSpot.mouseoutMarker = function(){
           currentSpot.marker.setIcon(markerIcons[5]);
@@ -307,7 +323,14 @@ function SpotsVM(){
           currentSpot.marker.setIcon(markerIcons[6]);
         };
         currentSpot.clickMarker = function(){
-          currentSpot.infowindow.open(map, currentSpot.marker);
+          currentCall.clickToggle = !currentCall.clickToggle;
+          if(currentCall.clickToggle){
+            currentCall.infowindow.open(map, currentCall.marker);
+            currentCall.marker.setAnimation(google.maps.Animation.BOUNCE);
+          }else{
+            currentCall.infowindow.close(map, currentCall.marker);
+            currentCall.marker.setAnimation(null);
+          }
         };
 
         return currentSpot;
@@ -349,7 +372,14 @@ function CallsVM(){
           currentCall.marker.setVisible(currentCall.filterAccident());
         };
         currentCall.clickMarker = function(){
-          currentCall.infowindow.open(map, currentCall.marker);
+          currentCall.clickToggle = !currentCall.clickToggle;
+          if(currentCall.clickToggle){
+            currentCall.infowindow.open(map, currentCall.marker);
+            currentCall.marker.setAnimation(google.maps.Animation.BOUNCE);
+          }else{
+            currentCall.infowindow.close(map, currentCall.marker);
+            currentCall.marker.setAnimation(null);
+          }
         };
 
         return currentCall;
