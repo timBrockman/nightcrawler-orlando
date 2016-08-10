@@ -26,7 +26,14 @@ function SpotsVM(){
           this.setIcon(markerIcons[5]);
         });
         currentSpot.marker.addListener('click', function(){
-          currentSpot.infowindow.open(map, currentSpot.marker);
+          currentCall.clickToggle = !currentCall.clickToggle;
+          if(currentCall.clickToggle){
+            currentCall.infowindow.open(map, currentCall.marker);
+            currentCall.marker.setAnimation(google.maps.Animation.BOUNCE);
+          }else{
+            currentCall.infowindow.close(map, currentCall.marker);
+            currentCall.marker.setAnimation(null);
+          }
         });
         currentSpot.mouseoutMarker = function(){
           currentSpot.marker.setIcon(markerIcons[5]);
@@ -35,7 +42,14 @@ function SpotsVM(){
           currentSpot.marker.setIcon(markerIcons[6]);
         };
         currentSpot.clickMarker = function(){
-          currentSpot.infowindow.open(map, currentSpot.marker);
+          currentCall.clickToggle = !currentCall.clickToggle;
+          if(currentCall.clickToggle){
+            currentCall.infowindow.open(map, currentCall.marker);
+            currentCall.marker.setAnimation(google.maps.Animation.BOUNCE);
+          }else{
+            currentCall.infowindow.close(map, currentCall.marker);
+            currentCall.marker.setAnimation(null);
+          }
         };
 
         return currentSpot;
@@ -77,7 +91,14 @@ function CallsVM(){
           currentCall.marker.setVisible(currentCall.filterAccident());
         };
         currentCall.clickMarker = function(){
-          currentCall.infowindow.open(map, currentCall.marker);
+          currentCall.clickToggle = !currentCall.clickToggle;
+          if(currentCall.clickToggle){
+            currentCall.infowindow.open(map, currentCall.marker);
+            currentCall.marker.setAnimation(google.maps.Animation.BOUNCE);
+          }else{
+            currentCall.infowindow.close(map, currentCall.marker);
+            currentCall.marker.setAnimation(null);
+          }
         };
 
         return currentCall;

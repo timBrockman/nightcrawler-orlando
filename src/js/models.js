@@ -23,6 +23,7 @@ function Spot(data){
   this.lng    = data.hasOwnProperty('lng')?data.lng:-81.377001;
   this.mid    = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
   this.pos    = new google.maps.LatLng(this.lat, this.lng);
+  this.clickToggle = false;
   this.marker = new google.maps.Marker({
     map: map,
     position: this.pos,
@@ -69,6 +70,7 @@ function Call(data){
   _self.incidentId  = data.hasOwnProperty('INCIDENT')?data.INCIDENT.trim():'no id';
   _self.randIcon    = data.randIcon;
   _self.mid         = data.hasOwnProperty('markerId')?data.markerId:0; // corresponds to marker id
+  _self.clickToggle = false;
 
   //process location for geocoder by formatting ---not adding component restrictions---
   function processLocation(_rawLocation){
@@ -107,7 +109,14 @@ function Call(data){
         )
       });
       _self.marker.addListener('click', function() {
-        _self.infowindow.open(map, this);
+        _self.clickToggle = !_self.clickToggle;
+        if(_self.clickToggle){
+          _self.infowindow.open(map, _self.marker);
+          _self.marker.setAnimation(google.maps.Animation.BOUNCE);
+        }else{
+          _self.infowindow.close(map, _self.marker);
+          _self.marker.setAnimation(null);
+        }
       });
 
     }else{
