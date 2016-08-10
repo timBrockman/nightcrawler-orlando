@@ -15,8 +15,8 @@ function makeRequest(url, cbCalls){
        cbCalls(data.query.results.CALLS.CALL);
        return true;
     })
-    .fail(function(data){
-      console.log(data);
+    .fail(function(status){
+      window.alert("I'd like to think if you're having the worst day of your life.  Refresh the app to clear up the:" + status?status:' unknown problem');
     });
 }
 // holds raw calls to map in vm using model constructors

@@ -4,6 +4,7 @@ contains map settings and functions including initMap()
 (must load before map api callback)
 */
 var map;
+var mapInited = false;
 var geocoder;
 var markerIcons = [];
 var spotMarkers = [];
@@ -90,4 +91,5 @@ function initMap() {
   });
   geocoder = new google.maps.Geocoder();
   initIcons();
+  mapInited = true;
 }

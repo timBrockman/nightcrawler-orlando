@@ -11,7 +11,7 @@ adds behavior functions and listeners,
 and returns each as a member of observable array
 */
 function SpotsVM(){
-  //var _self = this; //unused
+  var self = this; //unused
   var itemCount = 0; //derp
   self.vmSpots =
     ko.observableArray($.map(

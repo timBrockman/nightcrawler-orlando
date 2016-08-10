@@ -111,7 +111,7 @@ function Call(data){
       });
 
     }else{
-      console.log('There seems to be a problem: ' + status);
+      window.alert("I'd like to think if you're having the worst day of your life. Try refreshing to fix the: " + status);
     }
   });
 }
