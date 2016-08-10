@@ -10,7 +10,7 @@ returns true after it recieves the data (incase that's needed)
 or logs an error if it fails
 */
 function makeRequest(url, cbCalls){
-  $.ajax(url+'&jsoncallback=?',{format:'jsonp'})
+  $.ajax(url+'&jsoncallback=?')
     .done(function(data){
        cbCalls(data.query.results.CALLS.CALL);
        return true;

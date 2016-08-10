@@ -22,7 +22,7 @@ returns true after it recieves the data (incase that's needed)
 or logs an error if it fails
 */
 function makeRequest(url, cbCalls){
-  $.ajax(url+'&jsoncallback=?',{format:'jsonp'})
+  $.ajax(url+'&jsoncallback=?')
     .done(function(data){
        cbCalls(data.query.results.CALLS.CALL);
        return true;
@@ -307,13 +307,13 @@ function SpotsVM(){
           this.setIcon(markerIcons[5]);
         });
         currentSpot.marker.addListener('click', function(){
-          currentCall.clickToggle = !currentCall.clickToggle;
-          if(currentCall.clickToggle){
-            currentCall.infowindow.open(map, currentCall.marker);
-            currentCall.marker.setAnimation(google.maps.Animation.BOUNCE);
+          currentSpot.clickToggle = !currentSpot.clickToggle;
+          if(currentSpot.clickToggle){
+            currentSpot.infowindow.open(map, currentSpot.marker);
+            currentSpot.marker.setAnimation(google.maps.Animation.BOUNCE);
           }else{
-            currentCall.infowindow.close(map, currentCall.marker);
-            currentCall.marker.setAnimation(null);
+            currentSpot.infowindow.close(map, currentSpot.marker);
+            currentSpot.marker.setAnimation(null);
           }
         });
         currentSpot.mouseoutMarker = function(){
@@ -323,13 +323,13 @@ function SpotsVM(){
           currentSpot.marker.setIcon(markerIcons[6]);
         };
         currentSpot.clickMarker = function(){
-          currentCall.clickToggle = !currentCall.clickToggle;
-          if(currentCall.clickToggle){
-            currentCall.infowindow.open(map, currentCall.marker);
-            currentCall.marker.setAnimation(google.maps.Animation.BOUNCE);
+          currentSpot.clickToggle = !currentSpot.clickToggle;
+          if(currentSpot.clickToggle){
+            currentSpot.infowindow.open(map, currentSpot.marker);
+            currentSpot.marker.setAnimation(google.maps.Animation.BOUNCE);
           }else{
-            currentCall.infowindow.close(map, currentCall.marker);
-            currentCall.marker.setAnimation(null);
+            currentSpot.infowindow.close(map, currentSpot.marker);
+            currentSpot.marker.setAnimation(null);
           }
         };
 
