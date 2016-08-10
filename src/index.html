@@ -55,6 +55,11 @@
     </nav>
     <div class="center legal">This project works, thanks to the above resources. Copyright &copy;2016 Tim Brockman</div>
   </footer>
+  <script>
+  function errorMsg(){
+    window.alert('I\'d like to think if you\'re having the worst day of your life. The app is fouled up. Wait a few moments, then hit refresh.');
+  }
+  </script>
 <!--jsstart-->
   <script src="js/247.js"></script>
   <script src="js/calls.js"></script>
@@ -64,8 +69,8 @@
   <script src="js/map.js"></script>
 <!--jsend-->
 
-  <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
-  <script async defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDEVVmIWFHRlfayjnj6zwWbs72eUBRu2cs&callback=initMap"></script>
+  <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js" onerror="errorMsg()"></script>
+  <script async defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" onerror="errorMsg()"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDEVVmIWFHRlfayjnj6zwWbs72eUBRu2cs&callback=initMap" onerror="errorMsg()"></script>
 
 </body>
