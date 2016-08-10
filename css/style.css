@@ -113,7 +113,7 @@ li{
   line-height: 1em;
   cursor:pointer;
 }
-li:hover{
+li:hover, li:active{
   color:var(--hilight);
 }
 input[type="checkbox"]{
