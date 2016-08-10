@@ -28,7 +28,7 @@ function makeRequest(url, cbCalls){
        return true;
     })
     .fail(function(status){
-      window.alert("I'd like to think if you're having the worst day of your life.  Refresh the app to clear up the:" + status?status:' unknown problem');
+      window.alert("I'd like to think if you're seeing me, you're having the worst day of your life. Try refreshing to fix the: " + (status && status.statusText?status.statusText:' Unknown Problem.'));
     });
 }
 // holds raw calls to map in vm using model constructors
@@ -37,9 +37,11 @@ var mCalls = [];
 maps.js
 contains map settings and functions including initMap()
 (must load before map api callback)
+
+***Also contains ko.applyBindings calls, which must load after the async deferred Google Maps Scripts.***
 */
 var map;
-var mapInited = false;
+//var mapInited = false;
 var geocoder;
 var markerIcons = [];
 var spotMarkers = [];
@@ -126,7 +128,17 @@ function initMap() {
   });
   geocoder = new google.maps.Geocoder();
   initIcons();
-  mapInited = true;
+  //mapInited = true;
+/*
+apply bindings moved to Map Init
+*/
+  ko.applyBindings(SpotsVM, document.getElementById('header'));
+  makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cbCalls);
+  function cbCalls(data){
+    mCalls = data;
+    ko.applyBindings(CallsVM, document.getElementById('callBox'));
+  };
+
 }
 /*
 models.js
@@ -238,6 +250,9 @@ function Call(data){
           _self.address + "<br>"
         )
       });
+      _self.infowindow.addListener('closeclick', function(){
+        _self.marker.setAnimation(null);
+      });
       _self.marker.addListener('click', function() {
         _self.clickToggle = !_self.clickToggle;
         if(_self.clickToggle){
@@ -250,7 +265,7 @@ function Call(data){
       });
 
     }else{
-      window.alert("I'd like to think if you're having the worst day of your life. Try refreshing to fix the: " + status);
+      window.alert("I'd like to think if you're seeing me, you're having the worst day of your life. Try refreshing to fix the: " + (status && status.statusText?status.statusText:' Unknown Problem.'));
     }
   });
 }
@@ -259,26 +274,8 @@ views.js
 contains the onload stuff
 triggering functions and callbacks that applyBindings
 */
-var applied = false; //incase callback triggered twice or something
-function cbCalls(data){
-  mCalls = data;
-  if(!applied){
-    ko.applyBindings(CallsVM, document.getElementById('callBox'));
-    applied = true;
-  }
-};
-// async defered still blocks onload event ensuring nonrace
-window.onload = function(){
 
   //applies bindings in callback after other crap loads
-  window.setTimeout(function () {
-    if(mapInited != true){
-      window.alert("I'd like to think if you're having the worst day of your life. The map is fouled up. Wait a few moments, then refresh this app.");
-    }
-    ko.applyBindings(SpotsVM, document.getElementById('header'));
-    makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cbCalls);
-  }, 1000);
-};
 /*
 vms.js
 knockout view model class constructors
@@ -315,6 +312,9 @@ function SpotsVM(){
             currentSpot.infowindow.close(map, currentSpot.marker);
             currentSpot.marker.setAnimation(null);
           }
+        });
+        currentSpot.infowindow.addListener('closeclick', function(){
+          currentSpot.marker.setAnimation(null);
         });
         currentSpot.mouseoutMarker = function(){
           currentSpot.marker.setIcon(markerIcons[5]);
