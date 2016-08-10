@@ -1,5 +1,5 @@
 {
-  "name": "hoodmap",
+  "name": "NightCrawler-FME",
   "version": "1.0.0",
   "description": "Maps crime in Orlando using Google Maps, YML and Knockout.js",
   "main": "index.js",
