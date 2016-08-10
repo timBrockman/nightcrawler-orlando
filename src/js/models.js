@@ -109,6 +109,7 @@ function Call(data){
         )
       });
       _self.infowindow.addListener('closeclick', function(){
+        _self.clickToggle = !_self.clickToggle;
         _self.marker.setAnimation(null);
       });
       _self.marker.addListener('click', function() {

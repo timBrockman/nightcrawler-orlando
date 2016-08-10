@@ -36,6 +36,7 @@ function SpotsVM(){
           }
         });
         currentSpot.infowindow.addListener('closeclick', function(){
+          currentSpot.clickToggle = !currentSpot.clickToggle;
           currentSpot.marker.setAnimation(null);
         });
         currentSpot.mouseoutMarker = function(){

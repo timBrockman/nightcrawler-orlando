@@ -251,6 +251,7 @@ function Call(data){
         )
       });
       _self.infowindow.addListener('closeclick', function(){
+        _self.clickToggle = !_self.clickToggle;
         _self.marker.setAnimation(null);
       });
       _self.marker.addListener('click', function() {
@@ -314,6 +315,7 @@ function SpotsVM(){
           }
         });
         currentSpot.infowindow.addListener('closeclick', function(){
+          currentSpot.clickToggle = !currentSpot.clickToggle;
           currentSpot.marker.setAnimation(null);
         });
         currentSpot.mouseoutMarker = function(){
