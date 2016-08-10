@@ -35,6 +35,9 @@ function SpotsVM(){
             currentSpot.marker.setAnimation(null);
           }
         });
+        currentSpot.infowindow.addListener('closeclick', function(){
+          currentSpot.marker.setAnimation(null);
+        });
         currentSpot.mouseoutMarker = function(){
           currentSpot.marker.setIcon(markerIcons[5]);
         };

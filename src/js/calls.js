@@ -16,7 +16,7 @@ function makeRequest(url, cbCalls){
        return true;
     })
     .fail(function(status){
-      window.alert("I'd like to think if you're having the worst day of your life.  Refresh the app to clear up the:" + status?status:' unknown problem');
+      window.alert("I'd like to think if you're seeing me, you're having the worst day of your life. Try refreshing to fix the: " + (status && status.statusText?status.statusText:' Unknown Problem.'));
     });
 }
 // holds raw calls to map in vm using model constructors

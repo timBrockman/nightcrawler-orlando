@@ -2,9 +2,11 @@
 maps.js
 contains map settings and functions including initMap()
 (must load before map api callback)
+
+***Also contains ko.applyBindings calls, which must load after the async deferred Google Maps Scripts.***
 */
 var map;
-var mapInited = false;
+//var mapInited = false;
 var geocoder;
 var markerIcons = [];
 var spotMarkers = [];
@@ -91,5 +93,15 @@ function initMap() {
   });
   geocoder = new google.maps.Geocoder();
   initIcons();
-  mapInited = true;
+  //mapInited = true;
+/*
+apply bindings moved to Map Init
+*/
+  ko.applyBindings(SpotsVM, document.getElementById('header'));
+  makeRequest("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww1.cityoforlando.net%2Fopd%2Factivecalls%2Factivecad.xml'&format=json&diagnostics=true", cbCalls);
+  function cbCalls(data){
+    mCalls = data;
+    ko.applyBindings(CallsVM, document.getElementById('callBox'));
+  };
+
 }

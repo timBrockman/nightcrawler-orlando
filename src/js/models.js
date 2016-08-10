@@ -108,6 +108,9 @@ function Call(data){
           _self.address + "<br>"
         )
       });
+      _self.infowindow.addListener('closeclick', function(){
+        _self.marker.setAnimation(null);
+      });
       _self.marker.addListener('click', function() {
         _self.clickToggle = !_self.clickToggle;
         if(_self.clickToggle){
@@ -120,7 +123,7 @@ function Call(data){
       });
 
     }else{
-      window.alert("I'd like to think if you're having the worst day of your life. Try refreshing to fix the: " + status);
+      window.alert("I'd like to think if you're seeing me, you're having the worst day of your life. Try refreshing to fix the: " + (status && status.statusText?status.statusText:' Unknown Problem.'));
     }
   });
 }
