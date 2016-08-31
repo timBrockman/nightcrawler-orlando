@@ -3,6 +3,8 @@
    __Next Orlando vacation, ignore the theme parks.
    Immerse your whole family in the world of live crime journalism.__
 
+![Preview image](https://github.com/timBrockman/nightcrawler-orlando/blob/master/ns-fl-man.gif)
+
   - Hang out at the local 24 hour places.
   - Respond to local dispatch calls from the city.
   - Be the first reporter on the scene to get the 'money shot'.
